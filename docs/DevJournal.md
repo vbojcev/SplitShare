@@ -2,7 +2,7 @@
 
 A running journal of development to keep track of progress as well as random notes such as solutions to problems (includes even the most basic things like Linux commands and VSCode configuration). Uses DD/MM/YY format for entries.
 
-# 08/05/23
+## 08/05/23
 
 The ultimate goal is to have this be both a web and mobile app (iOS).
 
@@ -16,3 +16,7 @@ I've decided to commit to using NextJS for this project for a few reasons.
 One of my goals for the near future is to learn Typescript, from what I can see it makes JS into a typed language which I much prefer.
 
 Going off of [NextJS Docs](https://nextjs.org/docs) and [NextJS Learn](https://nextjs.org/learn/foundations/about-nextjs).
+
+## 14/05/23
+
+I've started going through an old MERN tutorial project to re-familiarize myself with React. Also just found out that there's been a recent upheaval in Next where they are moving from a "page router" to "app router" system. I can only guess what those two mean but it feels like it's gonna get complicated since the app router docs are still being updated at this moment.
