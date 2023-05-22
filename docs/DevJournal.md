@@ -20,3 +20,17 @@ Going off of [NextJS Docs](https://nextjs.org/docs) and [NextJS Learn](https://n
 ## 14/05/23
 
 I've started going through an old MERN tutorial project to re-familiarize myself with React. Also just found out that there's been a recent upheaval in Next where they are moving from a "page router" to "app router" system. I can only guess what those two mean but it feels like it's gonna get complicated since the app router docs are still being updated at this moment.
+
+## 15/05/23
+
+Did create-next-app with typescript, tailwind, and src folder (I don't know tailwind or typescript apart from what they do on a high level).
+
+Explored layout.tsx and page.tsx, discovered new HTML/JSX syntax such as `&nbsp;` and `&gt;` which basically just input special characters (also works in markdown apparently &gt;), [source](https://www.w3schools.com/html/html_entities.asp). Need to figure out what the point of the layout.tsx file is.
+
+Started reading through the React essentials page of the Next docs, learned about server vs client components.
+
+Since all JS is valid TS, I think I'll write things in JS first and then migrate to TS.
+
+Still have to figure out how testing works.
+
+"Page" == unique to route, "layout" == common to children.
