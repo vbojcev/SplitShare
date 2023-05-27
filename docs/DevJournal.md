@@ -34,3 +34,13 @@ Since all JS is valid TS, I think I'll write things in JS first and then migrate
 Still have to figure out how testing works.
 
 "Page" == unique to route, "layout" == common to children.
+
+## 22/05/23
+
+Will start doing some work. First need to figure out how to use Tailwind and will get a basic layout running.
+
+Discovered a couple of things. First is that prettier can be installed as a dependency and not just a VSCode extension, and prettier config files take precedence over VScode configurations. To use a config file, you have to create it: [prettier.config.js](https://prettier.io/docs/en/configuration.html) in the root directory of a project. In Next.js this creates an error but it is fixed by following directions from [this post](https://stackoverflow.com/questions/68163385/parsing-error-cannot-find-module-next-babel) (it's an eslint problem). Also installed the [tailwind plugin for prettier](https://github.com/tailwindlabs/prettier-plugin-tailwindcss).
+
+## 27/05/23
+
+Started fiddling around with tailwind/css, specifically the header component. Trying to figure out how the responsiveness works. Found out about the [screen width](https://stackoverflow.com/questions/43445592/what-is-the-meaning-of-xs-md-lg-in-css-flexbox-system) (lg, xl, etc).
