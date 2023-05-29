@@ -8,12 +8,12 @@ export default function Home() {
         <p>Home Page</p>
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
+      {/*<div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <HomePageLink text={'Link 1'} desc={'Description 1'} />
         <HomePageLink text={'Link 2'} desc={'Description 2'} />
         <HomePageLink text={'Link 3'} desc={'Description 3'} />
         <HomePageLink text={'Link 4'} desc={'Description 4'} />
-      </div>
+  </div>*/}
     </>
   );
 }

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import loggedIn from '@/utils/login';
 
 const Header = () => {
   return (
@@ -7,7 +8,10 @@ const Header = () => {
         SplitShare
       </Link>
       <div className="z-10 w-full max-w-5xl items-center font-mono text-sm lg:flex lg:justify-end">
-        <HeaderElement text={'Profile'} route={'/profile'} />
+        <HeaderElement
+          text={loggedIn ? 'Profile' : 'Log In'}
+          route={loggedIn ? '/profile' : '/login'}
+        />
       </div>
     </div>
   );
