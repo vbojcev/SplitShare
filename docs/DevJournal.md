@@ -44,3 +44,7 @@ Discovered a couple of things. First is that prettier can be installed as a depe
 ## 27/05/23
 
 Started fiddling around with tailwind/css, specifically the header component. Trying to figure out how the responsiveness works. Found out about the [screen width](https://stackoverflow.com/questions/43445592/what-is-the-meaning-of-xs-md-lg-in-css-flexbox-system) (lg, xl, etc).
+
+## 29/05/23
+
+Installed bcrypt, mongodb, mongoose, next-auth as per JSMastery's tutorial.

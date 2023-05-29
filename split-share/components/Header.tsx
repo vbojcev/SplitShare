@@ -1,5 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import loggedIn from '@/utils/login';
+
+import { useState, useEffect } from 'react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 const Header = () => {
   return (
