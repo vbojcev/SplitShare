@@ -83,3 +83,5 @@ const nextConfig = {
   },
 };
 ```
+
+TODO: Signing in sometimes takes a second. Maybe I can find a way to have a Suspense Component to indicate that things are happening and it's not just frozen.
