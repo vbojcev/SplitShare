@@ -85,3 +85,49 @@ const nextConfig = {
 ```
 
 TODO: Signing in sometimes takes a second. Maybe I can find a way to have a Suspense Component to indicate that things are happening and it's not just frozen.
+
+## 01/06/23
+
+Found out a way to protect from someone not being signed in accessing `/profile`:
+
+```js
+'use client';
+import { useSession, getProviders } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+const page = () => {
+  const [providers, setProviders] = useState(null);
+
+  //pull user session:
+  const { data: session } = useSession();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    (async () => {
+      const res: any = await getProviders();
+      setProviders(res);
+
+      //if user not logged in, redirect to home
+      if (!session?.user) {
+        router.push('/');
+      }
+    })();
+  }, []);
+
+  return (
+    <>
+      {session?.user ? (
+        <div className="relative flex place-items-center">
+          <p>{session?.user ? session.user.name : 'ERROR'}'s profile.</p>
+        </div>
+      ) : (
+        <></>
+      )}
+    </>
+  );
+};
+
+export default page;
+```
