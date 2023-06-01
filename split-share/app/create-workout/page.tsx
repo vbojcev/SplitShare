@@ -1,10 +1,10 @@
 'use client';
+
 import { useSession, getProviders } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
-const Profile = () => {
+const CreateWorkout = () => {
   const [providers, setProviders] = useState(null);
 
   //pull user session:
@@ -27,14 +27,8 @@ const Profile = () => {
   return (
     <>
       {session?.user ? (
-        <div className="relative flex flex-col place-items-center">
-          <p>{session?.user ? session.user.name : 'ERROR'}'s profile.</p>
-          <Link
-            href={'/create-workout'}
-            className="static my-1 flex w-auto justify-center rounded-xl border border-b border-gray-300 bg-gray-200 bg-gradient-to-b from-zinc-200 p-4 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:mx-2"
-          >
-            Create Workout
-          </Link>
+        <div className="relative flex place-items-center">
+          <p>Create Workout.</p>
         </div>
       ) : (
         <></>
@@ -43,4 +37,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default CreateWorkout;

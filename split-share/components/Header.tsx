@@ -32,6 +32,24 @@ const Header = () => {
         ) : (
           <></>
         )}*/}
+        {/*If user logged in and has profile picture, display it. Otherwise, placeholder. */}
+        {session?.user ? (
+          <Link href={'/profile'} className={'flex justify-center'}>
+            <Image
+              src={
+                session?.user.image
+                  ? String(session?.user.image)
+                  : '/images/placeholderImage.svg'
+              }
+              width={38}
+              height={38}
+              className={'rounded-full'}
+              alt={'profile'}
+            />
+          </Link>
+        ) : (
+          <></>
+        )}
         {/*Note for future self: the button has w-full AND lg:w-auto unlike the HeaderElements because w-auto means different things for buttons vs other things. */}
         {session?.user ? (
           <button
@@ -61,24 +79,6 @@ const Header = () => {
                 )
               )}
           </>
-        )}
-        {/*If user logged in and has profile picture, display it. Otherwise, placeholder. */}
-        {session?.user ? (
-          <Link href={'/profile'} className={'flex justify-center'}>
-            <Image
-              src={
-                session?.user.image
-                  ? String(session?.user.image)
-                  : '/images/placeholderImage.svg'
-              }
-              width={38}
-              height={38}
-              className={'rounded-full'}
-              alt={'profile'}
-            />
-          </Link>
-        ) : (
-          <></>
         )}
       </div>
     </nav>

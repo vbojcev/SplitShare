@@ -131,3 +131,5 @@ const page = () => {
 
 export default page;
 ```
+
+The extra `session?.user` check seems to be necessary, otherwise going to `/profile` while not logged in momentarily loads the JSX before useEffect() has any chance to redirect to home.
