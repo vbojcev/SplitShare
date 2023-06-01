@@ -27,11 +27,11 @@ const Header = () => {
       </Link>
       <div className="z-10 w-full max-w-5xl items-center font-mono text-sm lg:flex lg:justify-end">
         <HeaderElement text={'Browse Workouts'} route={'/browse'} />
-        {session?.user ? (
+        {/*{session?.user ? (
           <HeaderElement text={'Profile'} route={'/profile'} />
         ) : (
           <></>
-        )}
+        )}*/}
         {/*Note for future self: the button has w-full AND lg:w-auto unlike the HeaderElements because w-auto means different things for buttons vs other things. */}
         {session?.user ? (
           <button
@@ -62,13 +62,24 @@ const Header = () => {
               )}
           </>
         )}
-        <Image
-          src="/images/placeholderImage.svg"
-          width={38}
-          height={38}
-          className={'rounded-full'}
-          alt={'profile'}
-        />
+        {/*If user logged in and has profile picture, display it. Otherwise, placeholder. */}
+        {session?.user ? (
+          <Link href={'/profile'} className={'flex justify-center'}>
+            <Image
+              src={
+                session?.user.image
+                  ? String(session?.user.image)
+                  : '/images/placeholderImage.svg'
+              }
+              width={38}
+              height={38}
+              className={'rounded-full'}
+              alt={'profile'}
+            />
+          </Link>
+        ) : (
+          <></>
+        )}
       </div>
     </nav>
   );

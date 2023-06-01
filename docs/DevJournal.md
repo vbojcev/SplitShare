@@ -68,3 +68,18 @@ The JSM tutorial might be using outdated logic, the useNewUrlParser option in mo
 NextAuth needs some extra things in the .env: [link](https://next-auth.js.org/configuration/options).
 
 Oauth2.0 providers (e.g google) require valid redirect URIs. Look at 1:43:00 of the JSM tutorial to see what you have to do (add the redirect URI to the google console).
+
+Had to add the following in the next config to get the google profile image thing to work:
+
+```js
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+    ],
+  },
+};
+```
