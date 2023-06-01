@@ -2,6 +2,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Provider from '@/components/Provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,13 +19,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <main className="flex min-h-screen flex-col items-center justify-between px-24 py-12">
-          {/*Header and Footer are present at all times => render in root layout */}
-          <Header />
-          {children}
-          <Footer />
-        </main>
+      <body className={inter.className + 'flex content-center'}>
+        <Provider>
+          <main className="flex min-h-screen flex-col items-center justify-between px-24 py-12 font-mono">
+            {/*Header and Footer are present at all times => render in root layout */}
+            <Header />
+            {children}
+            <Footer />
+          </main>
+        </Provider>
       </body>
     </html>
   );

@@ -48,3 +48,23 @@ Started fiddling around with tailwind/css, specifically the header component. Tr
 ## 29/05/23
 
 Installed bcrypt, mongodb, mongoose, next-auth as per JSMastery's tutorial.
+
+## 30/05/23
+
+Since I'm using TS, needed more info than tutorial. Found this link listing out the [types for the provider object](https://next-auth.js.org/v3/configuration/providers) from next auth.
+
+[Next Auth Example repo](https://github.com/nextauthjs/next-auth-example)
+
+All providers (redux toolkit query, regularly used files) should go in main layout.
+
+Found a [good article](https://codevoweb.com/setup-and-use-nextauth-in-nextjs-13-app-directory/) for how to implement nextauth in nextJS 13. Relevant [Twitter post](https://twitter.com/nextauthjs/status/1589719535363715072?lang=en).
+
+## 31/05/23
+
+The Google OAuth Client ID and Client Secret should be in .env under
+
+The JSM tutorial might be using outdated logic, the useNewUrlParser option in mongoose.connect does not have a type definition and this seems to be because such deprecation options are no longer necessary: [link](https://stackoverflow.com/questions/56306484/type-error-using-usenewurlparser-with-mongoose-in-typescript). [official mongoose docs](https://mongoosejs.com/docs/migrating_to_6.html#no-more-deprecation-warning-options).
+
+NextAuth needs some extra things in the .env: [link](https://next-auth.js.org/configuration/options).
+
+Oauth2.0 providers (e.g google) require valid redirect URIs. Look at 1:43:00 of the JSM tutorial to see what you have to do (add the redirect URI to the google console).

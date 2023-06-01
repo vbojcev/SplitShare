@@ -25,3 +25,14 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+h1 {
+  /*my-2*/
+  margin-top: 0.5rem /* 8px */;
+  margin-bottom: 0.5rem /* 8px */;
+  /*text-xl*/
+  font-size: 1.5rem /* 18px */;
+  line-height: 1.75rem /* 28px */;
+  /*font-semibold*/
+  font-weight: 600;
+}

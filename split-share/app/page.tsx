@@ -1,53 +1,17 @@
-import WorkoutCard from '@/components/WorkoutCard';
-
 let placeholdertext: string =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
 export default function Home() {
   return (
     <>
-      <div className="relative flex place-items-center">
-        <p>Home Page</p>
+      <div className="relative max-w-3xl place-items-center">
+        <h1 className={'my-2 flex justify-center'}>Introduction</h1>
+        <p>
+          SplitShare is a platform where you can easily browse training splits,
+          save them, and then track your progress. This is a side/hobby project
+          created by Vojdan Bojcev.
+        </p>
       </div>
-
-      <div className="relative flex w-full flex-col place-items-center">
-        <WorkoutCard
-          name={'Workout A'}
-          author={'User A'}
-          description={placeholdertext}
-        />
-        <WorkoutCard
-          name={'Workout B'}
-          author={'User B'}
-          description={placeholdertext}
-        />
-        <WorkoutCard
-          name={'Workout C'}
-          author={'User C'}
-          description={placeholdertext}
-        />
-        <WorkoutCard
-          name={'Workout D'}
-          author={'User D'}
-          description={placeholdertext}
-        />
-        <WorkoutCard
-          name={'Workout E'}
-          author={'User E'}
-          description={placeholdertext}
-        />
-        <WorkoutCard
-          name={'Workout F'}
-          author={'User F'}
-          description={placeholdertext}
-        />
-      </div>
-      {/*<div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <HomePageLink text={'Link 1'} desc={'Description 1'} />
-        <HomePageLink text={'Link 2'} desc={'Description 2'} />
-        <HomePageLink text={'Link 3'} desc={'Description 3'} />
-        <HomePageLink text={'Link 4'} desc={'Description 4'} />
-  </div>*/}
     </>
   );
 }
