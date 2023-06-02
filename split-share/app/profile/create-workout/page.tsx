@@ -28,6 +28,8 @@ const CreateWorkout = () => {
   const createWorkout: FormEventHandler = async (e) => {
     e.preventDefault();
 
+    setIsSubmitting(true);
+
     try {
       const response = await fetch('/api/workout/new', {
         method: 'POST',
@@ -43,6 +45,9 @@ const CreateWorkout = () => {
       //Return to profile page upon successful creation.
       if (response.ok) {
         router.push('/profile');
+      } else {
+        const message = await response.text();
+        alert(message);
       }
     } catch (error) {
       console.log(error);

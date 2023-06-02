@@ -21,11 +21,11 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className="z-10 w-full max-w-7xl items-center justify-between font-mono text-sm lg:flex">
-      <Link href="/" className="flex w-auto justify-center text-2xl font-bold">
+    <nav className="z-10 flex w-full max-w-7xl flex-col items-center justify-between font-mono text-sm lg:flex-row">
+      <Link href="/" className="flex w-auto justify-center text-4xl font-bold">
         SplitShare
       </Link>
-      <div className="z-10 w-full max-w-5xl items-center font-mono text-sm lg:flex lg:justify-end">
+      <div className="relative  z-10 w-full max-w-lg items-center align-middle font-mono text-sm lg:flex lg:justify-end">
         <HeaderElement text={'Browse Workouts'} route={'/browse'} />
         {/*{session?.user ? (
           <HeaderElement text={'Profile'} route={'/profile'} />
@@ -34,24 +34,27 @@ const Header = () => {
         )}*/}
         {/*If user logged in and has profile picture, display it. Otherwise, placeholder. */}
         {session?.user ? (
-          <Link
-            href={'/profile'}
-            className={
-              'flex justify-center rounded-full border-2 border-black dark:border-gray-300'
-            }
-          >
-            <Image
-              src={
-                session?.user.image
-                  ? String(session?.user.image)
-                  : '/images/placeholderImage.svg'
+          <div className="relative flex justify-center">
+            <Link
+              href={'/profile'}
+              className={
+                'relative flex w-fit flex-row rounded-full border-2 border-black align-middle dark:border-gray-300'
               }
-              width={40}
-              height={40}
-              className={'rounded-full dark:border-gray-300'}
-              alt={'profile'}
-            />
-          </Link>
+            >
+              <Image
+                src={
+                  session?.user.image
+                    ? String(session?.user.image)
+                    : '/images/placeholderImage.svg'
+                }
+                width={40}
+                height={40}
+                className={'rounded-full dark:border-gray-300'}
+                alt={'profile'}
+              />
+              <h1 className="mx-2 lg:hidden">{session.user.name}</h1>
+            </Link>
+          </div>
         ) : (
           <></>
         )}

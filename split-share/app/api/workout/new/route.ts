@@ -7,6 +7,21 @@ export const POST = async (request: any) => {
   try {
     await connectToDB();
 
+    const workoutExists = await Workout.findOne({
+      name: name,
+      creator: userId,
+    });
+
+    //Reject post if the user has another workout with the same name
+    if (workoutExists) {
+      return new Response(
+        'Workout with the same name already exists. Please choose another.',
+        {
+          status: 406,
+        }
+      );
+    }
+
     const newWorkout = new Workout({
       creator: userId,
       name: name,

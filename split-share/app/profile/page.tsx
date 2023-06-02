@@ -28,7 +28,7 @@ const Profile = () => {
     <>
       {session?.user ? (
         <div className="relative flex flex-col place-items-center gap-2">
-          <p>{session?.user ? session.user.name : 'ERROR'}'s profile.</p>
+          <h1>{session?.user ? session.user.name : 'ERROR'}'s profile.</h1>
           <Link
             href={'/profile/create-workout'}
             className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
