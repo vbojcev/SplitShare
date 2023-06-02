@@ -1,22 +1,18 @@
-import { Schema, model, models } from 'mongoose';
+import mongoose, { Schema, model, models } from 'mongoose';
 
 const WorkoutSchema = new Schema({
-  email: {
-    type: String,
-    unique: [true, 'Email already exists.'],
-    required: [true, 'Email is required.'],
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'All workouts require a creator.'],
   },
-  username: {
+  name: {
     type: String,
-    unique: [true, 'Username already exists.'],
-    required: [true, 'Username is required.'],
-    match: [
-      /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
-      'Username invalid, it should contain 8-20 alphanumeric letters and be unique.',
-    ],
+    required: [true, 'All workouts require a name.'],
   },
-  image: {
+  description: {
     type: String,
+    required: [true, 'All workouts require a description.'],
   },
 });
 

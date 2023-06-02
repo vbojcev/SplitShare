@@ -34,16 +34,21 @@ const Header = () => {
         )}*/}
         {/*If user logged in and has profile picture, display it. Otherwise, placeholder. */}
         {session?.user ? (
-          <Link href={'/profile'} className={'flex justify-center'}>
+          <Link
+            href={'/profile'}
+            className={
+              'flex justify-center rounded-full border-2 border-black dark:border-white'
+            }
+          >
             <Image
               src={
                 session?.user.image
                   ? String(session?.user.image)
                   : '/images/placeholderImage.svg'
               }
-              width={38}
-              height={38}
-              className={'rounded-full'}
+              width={40}
+              height={40}
+              className={'rounded-full dark:border-gray-300'}
               alt={'profile'}
             />
           </Link>
@@ -53,9 +58,8 @@ const Header = () => {
         {/*Note for future self: the button has w-full AND lg:w-auto unlike the HeaderElements because w-auto means different things for buttons vs other things. */}
         {session?.user ? (
           <button
-            className="static my-1 flex w-full justify-center rounded-xl border border-b border-gray-300 bg-gray-200 bg-gradient-to-b from-zinc-200 p-4 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:mx-2 lg:w-auto"
+            className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-auto"
             type="button"
-            /*onClick={signOut}*/
             onClick={() => signOut()}
           >
             Sign Out
@@ -72,7 +76,7 @@ const Header = () => {
                     type="button"
                     key={provider.name}
                     onClick={() => signIn(provider.id)}
-                    className="static my-1 flex w-full justify-center rounded-xl border border-b border-gray-300 bg-gray-200 bg-gradient-to-b from-zinc-200 p-4 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:mx-2 lg:w-auto"
+                    className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-auto"
                   >
                     Sign In
                   </button>
@@ -89,7 +93,7 @@ const HeaderElement = ({ text, route }: { text: string; route: string }) => {
   return (
     <Link
       href={route}
-      className="static my-1 flex w-auto justify-center rounded-xl border border-b border-gray-300 bg-gray-200 bg-gradient-to-b from-zinc-200 p-4 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:mx-2"
+      className="dark:bg static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
     >
       {text}
     </Link>
