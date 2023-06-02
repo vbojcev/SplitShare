@@ -8,32 +8,12 @@ const page = () => {
     <div className="relative flex w-full flex-col place-items-center">
       <WorkoutCard
         name={'Workout A'}
-        author={'User A'}
+        creator={'User A'}
         description={placeholdertext}
       />
       <WorkoutCard
         name={'Workout B'}
-        author={'User B'}
-        description={placeholdertext}
-      />
-      <WorkoutCard
-        name={'Workout C'}
-        author={'User C'}
-        description={placeholdertext}
-      />
-      <WorkoutCard
-        name={'Workout D'}
-        author={'User D'}
-        description={placeholdertext}
-      />
-      <WorkoutCard
-        name={'Workout E'}
-        author={'User E'}
-        description={placeholdertext}
-      />
-      <WorkoutCard
-        name={'Workout F'}
-        author={'User F'}
+        creator={'User B'}
         description={placeholdertext}
       />
     </div>

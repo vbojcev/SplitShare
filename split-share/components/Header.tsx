@@ -37,7 +37,7 @@ const Header = () => {
           <Link
             href={'/profile'}
             className={
-              'flex justify-center rounded-full border-2 border-black dark:border-white'
+              'flex justify-center rounded-full border-2 border-black dark:border-gray-300'
             }
           >
             <Image

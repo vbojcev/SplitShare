@@ -6,12 +6,11 @@ import React from 'react';
 
 const Provider = ({
   children,
-  session,
-}: {
+}: /*session,*/
+{
   children: React.ReactNode;
-  session: Session;
 }) => {
-  return <SessionProvider session={session}>{children}</SessionProvider>;
+  return <SessionProvider /*session={session}*/>{children}</SessionProvider>;
 };
 
 export default Provider;

@@ -1,10 +1,10 @@
-import mongoose, { Schema, model, models } from 'mongoose';
+import { Schema, model, models } from 'mongoose';
 
 const WorkoutSchema = new Schema({
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: [true, 'All workouts require a creator.'],
+    //required: [true, 'All workouts require a creator.'],
   },
   name: {
     type: String,

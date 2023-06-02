@@ -1,9 +1,9 @@
 const WorkoutCard = ({
-  author,
+  creator,
   name,
   description,
 }: {
-  author: string;
+  creator: string;
   name: string;
   description: string;
 }) => {
@@ -15,7 +15,7 @@ const WorkoutCard = ({
     >
       <div className={'flex justify-between'}>
         <p>{name}</p>
-        <p>Author: {author}</p>
+        <p>Author: {creator}</p>
       </div>
       <p className={'mt-2'}>{description}</p>
     </div>
