@@ -133,3 +133,9 @@ export default page;
 ```
 
 The extra `session?.user` check seems to be necessary, otherwise going to `/profile` while not logged in momentarily loads the JSX before useEffect() has any chance to redirect to home.
+
+## 03/06/23
+
+How to update Schema (will be useful for adding fields without having to reset absolutely everything): [link](https://stackoverflow.com/questions/50934800/add-field-not-in-schema-with-mongoose)
+
+How to have multiple providers in next-auth: [link](https://next-auth.js.org/providers/credentials)
