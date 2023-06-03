@@ -5,7 +5,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import { connectToDB } from '@/utils/database';
 import User from '@/models/user';
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       // Dumb thing doesn't automatically cast to string :|

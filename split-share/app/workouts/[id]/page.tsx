@@ -11,7 +11,9 @@ const Workout = ({ params }: { params: { id: string } }) => {
 
   useEffect(() => {
     const fetchWorkout = async () => {
-      const response = await fetch(`/api/workouts/${params.id}`);
+      const response = await fetch(`/api/workouts/${params.id}`, {
+        method: 'GET',
+      });
       const data = await response.json();
       setWorkout(data);
     };
