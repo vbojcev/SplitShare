@@ -26,18 +26,18 @@ const Profile = () => {
     })();
 
     const fetchWorkouts = async () => {
-      const response = await fetch('/api/workouts');
+      const response = await fetch(`/api/users/${session?.user.id}/workouts`);
       const data = await response.json();
       setWorkouts(data);
     };
 
-    fetchWorkouts();
-  }, []);
+    if (session?.user.id) fetchWorkouts();
+  }, [session?.user.id]);
 
   return (
     <>
       {session?.user ? (
-        <div className="relative flex flex-col place-items-center gap-2">
+        <div className="relative flex w-full flex-col place-items-center gap-2">
           <h1>{session?.user ? session.user.name : 'ERROR'}'s profile</h1>
           <Link
             href={'/profile/create-workout'}
