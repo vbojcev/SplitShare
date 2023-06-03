@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
+import WorkoutCard from '@/components/WorkoutCard';
+
 const Profile = () => {
   const [providers, setProviders] = useState(null);
-
+  const [workouts, setWorkouts] = useState([]);
   //pull user session:
   const { data: session } = useSession();
 
@@ -22,6 +24,14 @@ const Profile = () => {
         router.push('/');
       }
     })();
+
+    const fetchWorkouts = async () => {
+      const response = await fetch('/api/workouts');
+      const data = await response.json();
+      setWorkouts(data);
+    };
+
+    fetchWorkouts();
   }, []);
 
   return (
@@ -36,6 +46,16 @@ const Profile = () => {
             Create Workout
           </Link>
           <h1>Created Workouts:</h1>
+          <div className="relative flex w-full flex-col place-items-center">
+            {workouts.map((workout: any) => (
+              <WorkoutCard
+                key={workout.id}
+                creator={workout.creator.username}
+                name={workout.name}
+                description={workout.description}
+              />
+            ))}
+          </div>
         </div>
       ) : (
         <></>

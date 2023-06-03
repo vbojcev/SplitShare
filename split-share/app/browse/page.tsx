@@ -12,7 +12,7 @@ const page = () => {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch('/api/workout');
+      const response = await fetch('/api/workouts');
       const data = await response.json();
       setWorkouts(data);
     };

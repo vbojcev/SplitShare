@@ -31,7 +31,7 @@ const CreateWorkout = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/workout/new', {
+      const response = await fetch('/api/workouts/new', {
         method: 'POST',
         body: JSON.stringify({
           name: workout.name,
