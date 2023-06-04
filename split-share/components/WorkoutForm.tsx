@@ -51,7 +51,7 @@ const WorkoutForm = ({
         <div className="flex flex-row content-between">
           <button
             onClick={cancel}
-            className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-auto"
+            className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-rose-800 dark:from-inherit lg:mx-2 lg:w-auto"
           >
             Cancel
           </button>
