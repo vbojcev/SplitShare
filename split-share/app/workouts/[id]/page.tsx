@@ -1,8 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { error } from 'console';
 
 const Workout = ({ params }: { params: { id: string } }) => {
+  const router = useRouter();
+
   const [workout, setWorkout] = useState({
     name: null,
     creator: { username: null },
@@ -11,11 +15,21 @@ const Workout = ({ params }: { params: { id: string } }) => {
 
   useEffect(() => {
     const fetchWorkout = async () => {
-      const response = await fetch(`/api/workouts/${params.id}`, {
-        method: 'GET',
-      });
-      const data = await response.json();
-      setWorkout(data);
+      try {
+        const response = await fetch(`/api/workouts/${params.id}`, {
+          method: 'GET',
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setWorkout(data);
+        } else {
+          throw new Error('no workout found under that ID.');
+        }
+      } catch (error) {
+        console.log(error);
+        router.push('/');
+      }
     };
 
     fetchWorkout();

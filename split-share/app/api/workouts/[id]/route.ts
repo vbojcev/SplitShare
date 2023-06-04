@@ -18,7 +18,9 @@ export const GET = async (
       status: 200,
     });
   } catch (error) {
-    return new Response('Failed to fetch workout', { status: 500 });
+    return new Response(JSON.stringify({ msg: 'Failed to fetch workout' }), {
+      status: 500,
+    });
   }
 };
 
@@ -38,13 +40,20 @@ export const DELETE = async (
 
     if (session?.user.id == workout.creator._id) {
       await Workout.findByIdAndDelete(params.id);
-      return new Response(`Successfully deleted ${params.id}.`, {
-        status: 200,
-      });
+      return new Response(
+        JSON.stringify({ msg: `Successfully deleted ${params.id}.` }),
+        {
+          status: 200,
+        }
+      );
     } else {
-      return new Response('Unauthorized.', { status: 401 });
+      return new Response(JSON.stringify({ msg: 'Unauthorized.' }), {
+        status: 401,
+      });
     }
   } catch (error) {
-    return new Response('Failed to delete workout', { status: 500 });
+    return new Response(JSON.stringify({ msg: 'Failed to delete workout' }), {
+      status: 500,
+    });
   }
 };
