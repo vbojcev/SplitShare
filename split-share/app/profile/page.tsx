@@ -73,6 +73,7 @@ const Profile = () => {
                   creator={workout.creator.username}
                   name={workout.name}
                   description={workout.description}
+                  id={workout._id}
                 />
                 <button
                   onClick={() => deleteWorkout(workout._id)}

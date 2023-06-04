@@ -21,10 +21,11 @@ const page = () => {
     <div className="relative flex w-full flex-col place-items-center">
       {workouts.map((workout: any) => (
         <WorkoutCard
-          key={workout.id}
+          key={workout._id}
           creator={workout.creator.username}
           name={workout.name}
           description={workout.description}
+          id={workout._id}
         />
       ))}
     </div>
