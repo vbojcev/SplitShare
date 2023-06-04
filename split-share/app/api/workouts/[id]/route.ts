@@ -14,6 +14,12 @@ export const GET = async (
       _id: params.id,
     }).populate('creator');
 
+    if (!workout) {
+      return new Response(JSON.stringify({ msg: 'workout not found' }), {
+        status: 404,
+      });
+    }
+
     return new Response(JSON.stringify(workout), {
       status: 200,
     });

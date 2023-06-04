@@ -67,7 +67,7 @@ const Profile = () => {
           <h1>Created Workouts:</h1>
           <div className="relative flex w-full flex-col place-items-center">
             {workouts.map((workout: any) => (
-              <div className="alig flex w-full flex-row justify-center">
+              <div className="flex w-full flex-row justify-center">
                 <WorkoutCard
                   key={workout._id}
                   creator={workout.creator.username}
@@ -75,12 +75,6 @@ const Profile = () => {
                   description={workout.description}
                   id={workout._id}
                 />
-                <button
-                  onClick={() => deleteWorkout(workout._id)}
-                  className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
-                >
-                  Delete
-                </button>
               </div>
             ))}
           </div>
