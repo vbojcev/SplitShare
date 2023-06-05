@@ -41,11 +41,32 @@ const Workout = ({ params }: { params: { id: string } }) => {
     try {
       const response = await fetch(
         `/api/users/${session?.user.id}/savedWorkouts`,
-        { method: 'PATCH', body: JSON.stringify({ workoutId: params.id }) }
+        {
+          method: 'POST',
+          body: JSON.stringify({ workoutId: params.id }),
+        }
       );
 
       if (response.ok) {
         setPostSaved(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const unSaveWorkout = async () => {
+    try {
+      const response = await fetch(
+        `/api/users/${session?.user.id}/savedWorkouts`,
+        {
+          method: 'PATCH',
+          body: JSON.stringify({ workoutId: params.id }),
+        }
+      );
+
+      if (response.ok) {
+        setPostSaved(false);
       }
     } catch (error) {
       console.log(error);
@@ -82,7 +103,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
     const checkSaved = async () => {
       try {
         const response = await fetch(
-          `/api/users/${session?.user.id}/${params.id}`,
+          `/api/users/${session?.user.id}/savedWorkouts/${params.id}`,
           { method: 'GET' }
         );
 
@@ -94,7 +115,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
 
     fetchWorkout();
     checkSaved();
-  }, [deleted, postSaved]);
+  }, [deleted]);
 
   return (
     <>
@@ -117,14 +138,37 @@ const Workout = ({ params }: { params: { id: string } }) => {
           ) : (
             <></>
           )}
-          {session && !postSaved ? (
-            <button
-              onClick={saveWorkout}
-              className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
-            ></button>
+          {/*Explanation for block below: if no user is logged in or the creator is viewing the page, don't show anything.*/}
+          {/*Otherwise, show the "save" button if the user doesn't have the post saved or the "unsave" button if they do. */}
+          {session && session?.user.id !== workout.creator._id ? (
+            postSaved ? (
+              <button
+                onClick={unSaveWorkout}
+                className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+              >
+                Unsave Workout
+              </button>
+            ) : (
+              <button
+                onClick={saveWorkout}
+                className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+              >
+                Save Workout
+              </button>
+            )
           ) : (
             <></>
           )}
+          {/*session && session?.user.id !== workout.creator._id && !postSaved ? (
+            <button
+              onClick={saveWorkout}
+              className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+            >
+              Save Workout
+            </button>
+          ) : (
+            <></>
+          )*/}
         </div>
       ) : (
         <h1>Loading...</h1>

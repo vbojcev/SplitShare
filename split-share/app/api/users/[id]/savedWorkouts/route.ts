@@ -4,8 +4,6 @@ import User from '@/models/user';
 import { connectToDB } from '@/utils/database';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth/next';
-import { findAncestor } from 'typescript';
-import { isErrored } from 'stream';
 
 //return all workouts that a user has saved. Authentication not needed.
 export const GET = async (
@@ -28,7 +26,7 @@ export const GET = async (
 };
 
 // Add a saved workout.
-export const PATCH = async (
+export const POST = async (
   request: any,
   { params }: { params: { id: string } }
 ) => {
@@ -77,6 +75,52 @@ export const PATCH = async (
     return new Response(JSON.stringify({ msg: 'Post successfully saved.' }), {
       status: 200,
     });
+  } catch (error) {
+    return new Response(JSON.stringify({ msg: 'Error' }), { status: 500 });
+  }
+};
+
+// Unsave a workout.
+export const PATCH = async (
+  request: any,
+  { params }: { params: { id: string } }
+) => {
+  try {
+    await connectToDB();
+    const { workoutId } = await request.json();
+    const session = await getServerSession(authOptions);
+
+    //ensure user exists
+    const user = await User.findById(session?.user.id);
+
+    if (!user) {
+      return new Response(JSON.stringify({ msg: 'User not found.' }), {
+        status: 500,
+      });
+    }
+
+    //Check that user has post saved
+    const indexOfWorkout = user.savedWorkouts.indexOf(workoutId);
+
+    if (indexOfWorkout > -1) {
+      //remove from array
+      user.savedWorkouts.splice(indexOfWorkout, 1);
+      await user.save();
+
+      return new Response(
+        JSON.stringify({ msg: 'Post successfully unsaved.' }),
+        {
+          status: 200,
+        }
+      );
+    } else {
+      return new Response(
+        JSON.stringify({ msg: 'User does not have post saved.' }),
+        {
+          status: 500,
+        }
+      );
+    }
   } catch (error) {
     return new Response(JSON.stringify({ msg: 'Error' }), { status: 500 });
   }
