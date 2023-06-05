@@ -18,6 +18,12 @@ const UserSchema = new Schema({
   image: {
     type: String,
   },
+  savedWorkouts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Workout',
+    },
+  ],
 });
 
 //Have to make this check because NextJS uses a cold start for routes.
