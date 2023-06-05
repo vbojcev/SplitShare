@@ -13,6 +13,8 @@ const Workout = ({ params }: { params: { id: string } }) => {
 
   const [loading, setLoading] = useState(true);
 
+  const [postSaved, setPostSaved] = useState(false);
+
   const deleteWorkout = async () => {
     try {
       const response = await fetch(`/api/workouts/${params.id}`, {
@@ -30,6 +32,21 @@ const Workout = ({ params }: { params: { id: string } }) => {
       }
 
       setDeleted(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const saveWorkout = async () => {
+    try {
+      const response = await fetch(
+        `/api/users/${session?.user.id}/savedWorkouts`,
+        { method: 'PATCH', body: JSON.stringify({ workoutId: params.id }) }
+      );
+
+      if (response.ok) {
+        setPostSaved(true);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -61,8 +78,23 @@ const Workout = ({ params }: { params: { id: string } }) => {
       }
     };
 
+    //  Check if the workout is saved by the logged-in user.
+    const checkSaved = async () => {
+      try {
+        const response = await fetch(
+          `/api/users/${session?.user.id}/${params.id}`,
+          { method: 'GET' }
+        );
+
+        response.ok ? setPostSaved(true) : setPostSaved(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchWorkout();
-  }, [deleted]);
+    checkSaved();
+  }, [deleted, postSaved]);
 
   return (
     <>
@@ -82,6 +114,14 @@ const Workout = ({ params }: { params: { id: string } }) => {
             >
               Delete
             </button>
+          ) : (
+            <></>
+          )}
+          {session && !postSaved ? (
+            <button
+              onClick={saveWorkout}
+              className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+            ></button>
           ) : (
             <></>
           )}
