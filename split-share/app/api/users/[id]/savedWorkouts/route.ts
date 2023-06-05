@@ -8,12 +8,15 @@ import { getServerSession } from 'next-auth/next';
 //return all workouts that a user has saved. Authentication not needed.
 export const GET = async (
   request: any,
-  { params }: { params: { id: string; workoutId: string } }
+  { params }: { params: { id: string } }
 ) => {
   try {
     await connectToDB();
 
-    const user = await User.findById(params.id).populate('savedWorkouts');
+    const user = await User.findById(params.id).populate({
+      path: 'savedWorkouts',
+      populate: { path: 'creator' },
+    });
 
     const savedWorkouts = user.savedWorkouts;
 

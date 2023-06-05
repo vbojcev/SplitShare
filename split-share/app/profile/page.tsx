@@ -9,6 +9,7 @@ import WorkoutCard from '@/components/WorkoutCard';
 const Profile = () => {
   const [providers, setProviders] = useState(null);
   const [workouts, setWorkouts] = useState([]);
+  const [savedWorkouts, setSavedWorkouts] = useState([]);
   const [refresh, setRefresh] = useState(false);
   //pull user session:
   const { data: session } = useSession();
@@ -50,7 +51,16 @@ const Profile = () => {
       setWorkouts(data);
     };
 
-    if (session?.user.id) fetchWorkouts();
+    const fetchSaved = async () => {
+      const response = await fetch(
+        `/api/users/${session?.user.id}/savedWorkouts`
+      );
+      const data = await response.json();
+      setSavedWorkouts(data);
+    };
+
+    fetchWorkouts();
+    fetchSaved();
   }, [session?.user.id, refresh]);
 
   return (
@@ -78,6 +88,18 @@ const Profile = () => {
               </div>
             ))}
           </div>
+          <h1>Saved Workouts:</h1>
+          {savedWorkouts.map((workout: any) => (
+            <div className="flex w-full flex-row justify-center">
+              <WorkoutCard
+                key={workout._id}
+                creator={workout.creator.username}
+                name={workout.name}
+                description={workout.description}
+                id={workout._id}
+              />
+            </div>
+          ))}
         </div>
       ) : (
         <></>
