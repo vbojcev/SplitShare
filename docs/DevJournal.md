@@ -139,3 +139,36 @@ The extra `session?.user` check seems to be necessary, otherwise going to `/prof
 How to update Schema (will be useful for adding fields without having to reset absolutely everything): [link](https://stackoverflow.com/questions/50934800/add-field-not-in-schema-with-mongoose)
 
 How to have multiple providers in next-auth: [link](https://next-auth.js.org/providers/credentials)
+
+## 06/06/23
+
+Thinking about how to extend workouts. Currently they are just a title + description. The most important feature is exercises, I think each exercise would be its own object containing:
+
+- Name
+- Number of sets
+- Number of reps
+- Short note (e.g "last rep until failure")
+
+In the WorkoutForm, these would look like this:
+
+| name |
+
+| sets | reps |
+
+| notes |
+
+And there would be a button to add an exercise that would add more of these fields. [Tutorial for dynamic forms in React](https://www.freecodecamp.org/news/build-dynamic-forms-in-react/). One design decision I have yet to make is how to implement the exercises. It might be best to simply have them be their own schema+db, and have the workouts contain an array of IDs to these exercises. When fetching workouts, this array would be populated. Alternatively everything can be stored directly in the workout document, [this link](https://stackoverflow.com/questions/19695058/how-to-define-object-in-array-in-mongoose-schema-correctly-with-2d-geo-index) might help.
+
+For the sets and reps, there would need to be some validation. [Link to mongoose validation docs](https://mongoosejs.com/docs/validation.html#built-in-validators). Also workouts would now have both creator and exercises that need to be populated, [link to how to do that](https://stackoverflow.com/questions/12821596/multiple-populates-mongoosejs).
+
+Another addition to a workout can be a set of tags (hardcoded) to help filter workouts. This would be a flex-wrap container, and as each tag is selected it would change colour to indicate that.
+
+- leg/chest/arm/glute/etc
+- hypertrophy
+- strength
+- endurance
+- athleticism
+
+## 07/06/23
+
+I've decided that the set of exercises within each workout will instead be an array of subdocuments in the workout schema instead of an array of objectIDs. There is not enough reason to separate exercises from workouts in separate databases.
