@@ -1,6 +1,7 @@
 'use client';
-import { FormEventHandler, MouseEventHandler } from 'react';
+import { FormEventHandler, MouseEventHandler, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Montserrat_Alternates } from 'next/font/google';
 
 const WorkoutForm = ({
   handleSubmit,
@@ -48,7 +49,14 @@ const WorkoutForm = ({
             required
           />
         </label>
-        <div className="flex flex-row content-between">
+        <button
+          type="submit"
+          onClick={() => alert('adding exercise')}
+          className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-fit"
+        >
+          Add Exercise
+        </button>
+        <div className="flex flex-row justify-end">
           <button
             onClick={cancel}
             className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-rose-800 dark:from-inherit lg:mx-2 lg:w-auto"
