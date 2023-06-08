@@ -115,7 +115,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
 
     fetchWorkout();
     checkSaved();
-  }, [deleted]);
+  }, [deleted, session]);
 
   return (
     <>

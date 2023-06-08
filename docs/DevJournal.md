@@ -172,3 +172,9 @@ Another addition to a workout can be a set of tags (hardcoded) to help filter wo
 ## 07/06/23
 
 I've decided that the set of exercises within each workout will instead be an array of subdocuments in the workout schema instead of an array of objectIDs. There is not enough reason to separate exercises from workouts in separate databases.
+
+## 08/06/23
+
+Experiencing an issue in workout pages. If the post is saved and the user reloads the page, the button will say "save workout". Pressin the button causes an error because in the backend the user already has the post saved. The issue seems to be because checkSaved() runs in useEffect before useSession has time to get the session so it tries to check if an undefined user has the post saved. I should try to find a way to wait to run checkSaved() until the session has been established.
+
+Ended up fixing it by adding session to the dependency array. This works because session changes from undefined to a session object, however this also means that the workout page always renders twice (and therefore makes two extra API calls...). There should be a better way to do this but it's pretty low priority right now.
