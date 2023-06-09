@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 const Workout = ({ params }: { params: { id: string } }) => {
+
   const router = useRouter();
 
   const { data: session } = useSession();
@@ -14,6 +15,13 @@ const Workout = ({ params }: { params: { id: string } }) => {
   const [loading, setLoading] = useState(true);
 
   const [postSaved, setPostSaved] = useState(false);
+
+  const [workout, setWorkout] = useState({
+    name: null,
+    creator: { username: null, _id: null },
+    description: null,
+    exercises: [{id: null, name: '', sets: 1, reps: 1, note: ''}]
+  });
 
   const deleteWorkout = async () => {
     try {
@@ -73,12 +81,6 @@ const Workout = ({ params }: { params: { id: string } }) => {
     }
   };
 
-  const [workout, setWorkout] = useState({
-    name: null,
-    creator: { username: null, _id: null },
-    description: null,
-  });
-
   useEffect(() => {
     const fetchWorkout = async () => {
       try {
@@ -115,19 +117,30 @@ const Workout = ({ params }: { params: { id: string } }) => {
 
     fetchWorkout();
     checkSaved();
-  }, [deleted]);
+  }, [deleted, session]);
 
   return (
     <>
       {!loading ? (
-        <div className="relative flex w-full max-w-2xl flex-col place-items-center">
+        <div className="relative flex w-full max-w-3xl flex-col place-items-center">
           <div className="flex w-full flex-col justify-center">
             <h1 className="text-center">{workout.name}</h1>
-            <h1 className="text-center">
+            <h2 className="text-center">
               Created by {workout.creator.username}
-            </h1>
+            </h2>
           </div>
-          <p className="mt-8">{workout.description}</p>
+          <p className="mt-4 w-full">{workout.description}</p>
+          {workout.exercises.map((ex) => { return(
+            <div className='w-full mt-6' key={ex.id}>
+            <h2>
+              Exercise {ex.id}: {ex.name}
+            </h2>
+            <h2>
+              {ex.sets} Sets, {ex.reps} Reps.
+            </h2>
+            {ex.note && <p>Additional Note: {ex.note}</p>}
+            </div>
+          )})}
           {session?.user.id == workout.creator._id ? (
             <button
               onClick={deleteWorkout}
@@ -159,16 +172,6 @@ const Workout = ({ params }: { params: { id: string } }) => {
           ) : (
             <></>
           )}
-          {/*session && session?.user.id !== workout.creator._id && !postSaved ? (
-            <button
-              onClick={saveWorkout}
-              className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
-            >
-              Save Workout
-            </button>
-          ) : (
-            <></>
-          )*/}
         </div>
       ) : (
         <h1>Loading...</h1>
