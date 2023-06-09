@@ -36,3 +36,14 @@ h1 {
   /*font-semibold*/
   font-weight: 600;
 }
+
+h2 {
+  /*my-2*/
+  margin-top: 0.5rem /* 8px */;
+  margin-bottom: 0.5rem /* 8px */;
+  /*text-lg*/
+  font-size: 1.125rem /* 18px */;
+  line-height: 1.75rem /* 28px */;
+  /*font-semibold*/
+  font-weight: 600;
+}
