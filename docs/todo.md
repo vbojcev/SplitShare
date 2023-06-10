@@ -1,7 +1,0 @@
-- Workout Deletion
-- Save workouts
-  - For an active workout, be able to track progress (increasing weights, faster runs, etc)
-- More detailed workouts (sets, reps, time)
-  - "Add exercise" button (similar to "add experience" on job application sites)
-  - "Dropdown list of common exercises, plus "other" option to include your own
-- Ability to log in with email
