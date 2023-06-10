@@ -7,15 +7,15 @@ import User from '@/models/user';
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    // I plan to add more providers (at least a standard email+password method) in the future.
     GoogleProvider({
-      // Dumb thing doesn't automatically cast to string :|
       clientId: String(process.env.GOOGLE_ID),
       clientSecret: String(process.env.GOOGLE_CLIENT_SECRET),
     }),
   ],
   secret: process.env.NEXT_AUTH_SECRET,
   callbacks: {
-    async session({ session }: { session: any }) {
+    async session({ session }) {
       const sessionUser = await User.findOne({ email: session.user.email });
 
       session.user.id = sessionUser._id.toString();

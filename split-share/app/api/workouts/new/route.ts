@@ -1,7 +1,8 @@
 import Workout from '@/models/workout';
 import { connectToDB } from '@/utils/database';
 
-export const POST = async (request: any) => {
+// Create a post.
+export const POST = async (request: Request) => {
   const { userId, name, description, exercises, tags } = await request.json();
 
   try {

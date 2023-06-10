@@ -5,9 +5,11 @@ import { connectToDB } from '@/utils/database';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth/next';
 
-//return all workouts that a user has saved. Authentication not needed.
+import { Iuser } from '@/types/types';
+
+//return all workouts that a user has saved
 export const GET = async (
-  request: any,
+  request: Request,
   { params }: { params: { id: string } }
 ) => {
   try {
@@ -28,9 +30,9 @@ export const GET = async (
   }
 };
 
-// Add a saved workout.
+// Add a saved workout
 export const POST = async (
-  request: any,
+  request: Request,
   { params }: { params: { id: string } }
 ) => {
   try {
@@ -66,7 +68,7 @@ export const POST = async (
       return new Response(
         JSON.stringify({ msg: 'User already has post saved.' }),
         {
-          status: 500,
+          status: 404,
         }
       );
     } else {
@@ -83,9 +85,9 @@ export const POST = async (
   }
 };
 
-// Unsave a workout.
+// Unsave a workout
 export const PATCH = async (
-  request: any,
+  request: Request,
   { params }: { params: { id: string } }
 ) => {
   try {
@@ -103,7 +105,7 @@ export const PATCH = async (
     }
 
     //Check that user has post saved
-    const indexOfWorkout = user.savedWorkouts.indexOf(workoutId);
+    const indexOfWorkout: number = user.savedWorkouts.indexOf(workoutId);
 
     if (indexOfWorkout > -1) {
       //remove from array

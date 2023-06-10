@@ -7,7 +7,7 @@ import { getServerSession } from 'next-auth/next';
 
 // Retrieve a specific workout
 export const GET = async (
-  request: any /*Doesn't work without this, maybe it treats the params like a request.*/,
+  request: Request /*Doesn't work without this, maybe it treats the params like a request.*/,
   { params }: { params: { id: string } }
 ) => {
   try {
@@ -35,7 +35,7 @@ export const GET = async (
 
 // Delete a workout
 export const DELETE = async (
-  request: any,
+  request: Request,
   { params }: { params: { id: string } }
 ) => {
   try {
@@ -70,7 +70,7 @@ export const DELETE = async (
 
 // Add workout to a user's saved workouts.
 export const PATCH = async (
-  request: any,
+  request: Request,
   { params }: { params: { id: string } }
 ) => {
   try {
