@@ -30,6 +30,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
     try {
       const response = await fetch(`/api/workouts/${params.id}`, {
         method: 'DELETE',
+        cache: 'no-store',
       });
 
       console.log(`attempting route /api/workouts/${params.id}`);
@@ -55,6 +56,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
         {
           method: 'POST',
           body: JSON.stringify({ workoutId: params.id }),
+          cache: 'no-store',
         }
       );
 
@@ -73,6 +75,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
         {
           method: 'PATCH',
           body: JSON.stringify({ workoutId: params.id }),
+          cache: 'no-store',
         }
       );
 
@@ -89,6 +92,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
       try {
         const response = await fetch(`/api/workouts/${params.id}`, {
           method: 'GET',
+          cache: 'no-store',
         });
 
         if (response.ok) {
@@ -109,7 +113,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
       try {
         const response = await fetch(
           `/api/users/${session?.user.id}/savedWorkouts/${params.id}`,
-          { method: 'GET' }
+          { method: 'GET', cache: 'no-store' }
         );
 
         response.ok ? setPostSaved(true) : setPostSaved(false);

@@ -62,6 +62,7 @@ const CreateWorkout = () => {
           exercises: exercises,
           tags: tags,
         }),
+        cache: 'no-store',
       });
 
       //Return to profile page upon successful creation.

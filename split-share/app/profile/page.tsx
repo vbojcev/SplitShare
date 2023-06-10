@@ -16,7 +16,9 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch(`/api/users/${session?.user.id}/workouts`);
+      const response = await fetch(`/api/users/${session?.user.id}/workouts`, {
+        cache: 'no-store',
+      });
       if (response.ok) {
         const data = await response.json();
         setWorkouts(data);
@@ -27,7 +29,8 @@ const Profile = () => {
 
     const fetchSaved = async () => {
       const response = await fetch(
-        `/api/users/${session?.user.id}/savedWorkouts`
+        `/api/users/${session?.user.id}/savedWorkouts`,
+        { cache: 'no-store' }
       );
       if (response.ok) {
         const data = await response.json();
