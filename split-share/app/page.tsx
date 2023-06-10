@@ -1,21 +1,32 @@
-let placeholdertext: string =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-
 export default function Home() {
   return (
     <>
       <div className="relative max-w-3xl place-items-center">
         <h1 className={'my-2 flex justify-center'}>Introduction</h1>
         <p>
-          SplitShare is a platform where you can easily browse training splits,
-          save them, and then track your progress. This is a side/hobby project
-          created by Vojdan Bojcev.
+          SplitShare is a platform where you can easily create, browse, and save
+          training splits. This is a side/hobby project created by Vojdan
+          Bojcev.
+        </p>
+        <h1 className={'my-2 flex justify-center'}>Create</h1>
+        <p>
+          After creating an account and signing in, head to your profile from
+          which you can create a workout. Enter a name, description, and at
+          least one exercise, and post for the world to see.
+        </p>
+        <h1 className={'my-2 flex justify-center'}>Browse</h1>
+        <p>Click the Browse button to see what other users have posted.</p>
+        <h1 className={'my-2 flex justify-center'}>Save</h1>
+        <p>
+          Click on a workout card to view the entire workout. If you like it,
+          click the save button to save it to your profile.
         </p>
       </div>
     </>
   );
 }
 
+/*
 const HomePageLink = ({ text, desc }: { text: string; desc: string }) => {
   return (
     <a
@@ -33,7 +44,7 @@ const HomePageLink = ({ text, desc }: { text: string; desc: string }) => {
       <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>{desc}</p>
     </a>
   );
-};
+};*/
 
 //ORIGINAL NEXTJS TEMPLATE CODE:
 

@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
-const Workout = ({ params }: { params: { id: string } }) => {
+import { Iworkout } from '@/types/types';
 
+const Workout = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
 
   const { data: session } = useSession();
@@ -16,11 +17,13 @@ const Workout = ({ params }: { params: { id: string } }) => {
 
   const [postSaved, setPostSaved] = useState(false);
 
-  const [workout, setWorkout] = useState({
-    name: null,
-    creator: { username: null, _id: null },
-    description: null,
-    exercises: [{id: null, name: '', sets: 1, reps: 1, note: ''}]
+  const [workout, setWorkout] = useState<Iworkout>({
+    _id: '',
+    name: '',
+    creator: { username: '', _id: '', image: '', email: '', savedWorkouts: [] },
+    description: '',
+    exercises: [{ id: 0, name: '', sets: 1, reps: 1, note: '' }],
+    tags: [],
   });
 
   const deleteWorkout = async () => {
@@ -130,17 +133,19 @@ const Workout = ({ params }: { params: { id: string } }) => {
             </h2>
           </div>
           <p className="mt-4 w-full">{workout.description}</p>
-          {workout.exercises.map((ex) => { return(
-            <div className='w-full mt-6' key={ex.id}>
-            <h2>
-              Exercise {ex.id}: {ex.name}
-            </h2>
-            <h2>
-              {ex.sets} Sets, {ex.reps} Reps.
-            </h2>
-            {ex.note && <p>Additional Note: {ex.note}</p>}
-            </div>
-          )})}
+          {workout.exercises.map((ex) => {
+            return (
+              <div className="mt-6 w-full" key={ex.id}>
+                <h2>
+                  Exercise {ex.id}: {ex.name}
+                </h2>
+                <h2>
+                  {ex.sets} Sets, {ex.reps} Reps.
+                </h2>
+                {ex.note && <p>Additional Note: {ex.note}</p>}
+              </div>
+            );
+          })}
           {session?.user.id == workout.creator._id ? (
             <button
               onClick={deleteWorkout}

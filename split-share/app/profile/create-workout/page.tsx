@@ -9,6 +9,8 @@ import {
 } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { Iworkout } from '@/types/types';
+
 const CreateWorkout = () => {
   //pull user session:
   const { data: session } = useSession();

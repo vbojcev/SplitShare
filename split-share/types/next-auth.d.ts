@@ -9,8 +9,8 @@ declare module 'next-auth' {
    */
   interface Session {
     user: {
-      /** The user's postal address. */
       id: string;
     } & DefaultSession['user'];
+    // & DefaultSession['user'] means that id extends the default type
   }
 }
