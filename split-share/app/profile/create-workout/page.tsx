@@ -11,6 +11,8 @@ import { useRouter } from 'next/navigation';
 
 import { Iworkout } from '@/types/types';
 
+import { Iexercise } from '@/types/types';
+
 const CreateWorkout = () => {
   //pull user session:
   const { data: session } = useSession();
@@ -19,16 +21,18 @@ const CreateWorkout = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [workout, setWorkout] = useState({
+  const [workout, setWorkout] = useState<Iworkout>({
+    _id: '',
     name: '',
+    creator: { username: '', _id: '', image: '', email: '', savedWorkouts: [] },
     description: '',
+    exercises: [{ id: 0, name: '', sets: 1, reps: 1, note: '' }],
     tags: [],
-    exercises: [],
   });
 
   // For readability of users, indexing starts at 1
-  const [exercises, setExercises] = useState([
-    { id: 1, name: '', sets: 1, reps: 1, note: '' },
+  const [exercises, setExercises] = useState<Iexercise[]>([
+    { id: 0, name: '', sets: 1, reps: 1, note: '' },
   ]);
 
   const [tags, setTags] = useState([]);
@@ -132,10 +136,6 @@ const CreateWorkout = () => {
         }
       })
     );
-  };
-
-  const displayExercises = () => {
-    console.log(exercises);
   };
 
   const cancel: MouseEventHandler = () => router.push('/profile');
