@@ -1,73 +1,51 @@
 'use client';
-import { useSession, getProviders } from 'next-auth/react';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import WorkoutCard from '@/components/WorkoutCard';
 
+import { Iworkout } from '@/types/types';
+
 const Profile = () => {
-  const [providers, setProviders] = useState(null);
-  const [workouts, setWorkouts] = useState([]);
-  const [savedWorkouts, setSavedWorkouts] = useState([]);
-  const [refresh, setRefresh] = useState(false);
+  const [workouts, setWorkouts] = useState<Iworkout[]>([]);
+  const [savedWorkouts, setSavedWorkouts] = useState<Iworkout[]>([]);
   //pull user session:
   const { data: session } = useSession();
 
-  const router = useRouter();
-
-  const deleteWorkout = async (id: string) => {
-    try {
-      const response = await fetch(`/api/workouts/${id}`, { method: 'DELETE' });
-
-      console.log(`attempting route /api/workouts/${id}`);
-
-      if (response.ok) {
-        //setWorkouts(workouts.filter((workout: any) => workout._id !== id));
-        setRefresh((refresh) => !refresh);
-      } else {
-        const message = await response.text();
-        alert(message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    (async () => {
-      const res: any = await getProviders();
-      setProviders(res);
-
-      //if user not logged in, redirect to home
-      if (!session?.user) {
-        router.push('/');
-      }
-    })();
-
     const fetchWorkouts = async () => {
       const response = await fetch(`/api/users/${session?.user.id}/workouts`);
-      const data = await response.json();
-      setWorkouts(data);
+      if (response.ok) {
+        const data = await response.json();
+        setWorkouts(data);
+      } else {
+        setWorkouts([]);
+      }
     };
 
     const fetchSaved = async () => {
       const response = await fetch(
         `/api/users/${session?.user.id}/savedWorkouts`
       );
-      const data = await response.json();
-      setSavedWorkouts(data);
+      if (response.ok) {
+        const data = await response.json();
+        setSavedWorkouts(data);
+      } else {
+        setSavedWorkouts([]);
+      }
     };
 
     fetchWorkouts();
     fetchSaved();
-  }, [session?.user.id, refresh]);
+  }, [session?.user]);
 
   return (
     <>
       {session?.user ? (
         <div className="relative flex w-full flex-col place-items-center gap-2">
-          <h1>{session?.user ? session.user.name : 'ERROR'}'s profile</h1>
+          <h1>{session.user.name}'s profile</h1>
           <Link
             href={'/profile/create-workout'}
             className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
@@ -76,7 +54,7 @@ const Profile = () => {
           </Link>
           <h1>Created Workouts:</h1>
           <div className="relative flex w-full flex-col place-items-center">
-            {workouts.map((workout: any) => (
+            {workouts?.map((workout: Iworkout) => (
               <div className="flex w-full flex-row justify-center">
                 <WorkoutCard
                   key={workout._id}
@@ -89,7 +67,7 @@ const Profile = () => {
             ))}
           </div>
           <h1>Saved Workouts:</h1>
-          {savedWorkouts.map((workout: any) => (
+          {savedWorkouts?.map((workout: Iworkout) => (
             <div className="flex w-full flex-row justify-center">
               <WorkoutCard
                 key={workout._id}
@@ -102,7 +80,7 @@ const Profile = () => {
           ))}
         </div>
       ) : (
-        <></>
+        <h1>Please Log In.</h1>
       )}
     </>
   );
