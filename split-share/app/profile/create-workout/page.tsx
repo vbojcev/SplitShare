@@ -26,15 +26,16 @@ const CreateWorkout = () => {
     name: '',
     creator: { username: '', _id: '', image: '', email: '', savedWorkouts: [] },
     description: '',
-    exercises: [{ id: 0, name: '', sets: 1, reps: 1, note: '' }],
+    exercises: [{ id: 1, name: '', sets: 1, reps: 1, note: '' }],
     tags: [],
   });
 
   // For readability of users, indexing starts at 1
   const [exercises, setExercises] = useState<Iexercise[]>([
-    { id: 0, name: '', sets: 1, reps: 1, note: '' },
+    { id: 1, name: '', sets: 1, reps: 1, note: '' },
   ]);
 
+  // Future Feature: sort by tag in the browse page.
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
