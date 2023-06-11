@@ -1,3 +1,5 @@
+export const revalidate = 10;
+
 import Workout from '@/models/workout';
 import { connectToDB } from '@/utils/database';
 
