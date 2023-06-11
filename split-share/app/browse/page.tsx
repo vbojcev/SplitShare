@@ -10,7 +10,7 @@ const page = () => {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch('/api/workouts', { cache: 'no-store' });
+      const response = await fetch('/api/workouts/all', { cache: 'no-store' });
       const data = await response.json();
       setWorkouts(data);
     };
