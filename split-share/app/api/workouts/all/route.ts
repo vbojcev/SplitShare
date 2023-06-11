@@ -1,4 +1,4 @@
-export const revalidate = 10;
+export const revalidate = 0;
 
 import Workout from '@/models/workout';
 import { connectToDB } from '@/utils/database';
