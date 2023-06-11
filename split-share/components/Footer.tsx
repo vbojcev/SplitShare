@@ -4,14 +4,6 @@ const Footer = () => {
   return (
     <div className="z-10 w-full max-w-5xl items-center justify-center font-mono text-sm lg:flex">
       <FooterLink
-        text={'About'}
-        link={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
-      />
-      <FooterLink
-        text={'Contact'}
-        link={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
-      />
-      <FooterLink
         text={'Source Code'}
         link={'https://github.com/vbojcev/SplitShare'}
       />
