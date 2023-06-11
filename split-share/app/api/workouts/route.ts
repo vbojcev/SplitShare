@@ -2,7 +2,7 @@ import Workout from '@/models/workout';
 import { connectToDB } from '@/utils/database';
 
 // Get all workouts.
-export const GET = async () => {
+export const GET = async (request: Request) => {
   try {
     await connectToDB();
 
