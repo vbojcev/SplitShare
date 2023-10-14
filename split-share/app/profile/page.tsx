@@ -7,12 +7,15 @@ import Link from 'next/link';
 import WorkoutCard from '@/components/WorkoutCard';
 
 import { Iworkout } from '@/types/types';
+import { Router } from 'next/router';
 
 const Profile = () => {
   const [workouts, setWorkouts] = useState<Iworkout[]>([]);
   const [savedWorkouts, setSavedWorkouts] = useState<Iworkout[]>([]);
   //pull user session:
   const { data: session } = useSession();
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -40,6 +43,10 @@ const Profile = () => {
       }
     };
 
+    if (!session?.user) {
+      router.push('/');
+    }
+
     fetchWorkouts();
     fetchSaved();
   }, [session?.user]);
@@ -55,7 +62,7 @@ const Profile = () => {
           >
             Create Workout
           </Link>
-          <h1>Created Workouts:</h1>
+          {workouts.length ? <h1>Created Workouts:</h1> : <h1></h1>}
           <div className="relative flex w-full flex-col place-items-center">
             {workouts?.map((workout: Iworkout) => (
               <div className="flex w-full flex-row justify-center">
@@ -69,7 +76,7 @@ const Profile = () => {
               </div>
             ))}
           </div>
-          <h1>Saved Workouts:</h1>
+          {savedWorkouts.length ? <h1>Saved Workouts:</h1> : <h1></h1>}
           {savedWorkouts?.map((workout: Iworkout) => (
             <div className="flex w-full flex-row justify-center">
               <WorkoutCard
@@ -83,7 +90,7 @@ const Profile = () => {
           ))}
         </div>
       ) : (
-        <h1>Please Log In.</h1>
+        <h1>Redirecting...</h1>
       )}
     </>
   );
