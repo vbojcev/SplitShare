@@ -62,6 +62,12 @@ const Profile = () => {
           >
             Create Workout
           </Link>
+          <Link
+            href={'/profile/change-username'}
+            className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+          >
+            Change Username
+          </Link>
           {workouts.length ? <h1>Created Workouts:</h1> : <h1></h1>}
           <div className="relative flex w-full flex-col place-items-center">
             {workouts?.map((workout: Iworkout) => (
