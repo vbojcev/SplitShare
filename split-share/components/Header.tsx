@@ -26,7 +26,6 @@ const Header = () => {
         SplitShare
       </Link>
       <div className="relative  z-10 w-full max-w-lg items-center align-middle font-mono text-sm lg:flex lg:justify-end">
-        <HeaderElement text={'Browse Workouts'} route={'/browse'} />
         {/*{session?.user ? (
           <HeaderElement text={'Profile'} route={'/profile'} />
         ) : (
@@ -58,6 +57,8 @@ const Header = () => {
         ) : (
           <></>
         )}
+        <HeaderElement text={'Browse Workouts'} route={'/browse'} />
+
         {/*Note for future self: the button has w-full AND lg:w-auto unlike the HeaderElements because w-auto means different things for buttons vs other things. */}
         {session?.user ? (
           <button
@@ -70,7 +71,7 @@ const Header = () => {
         ) : (
           <>
             {/*Map all providers each to a button*/}
-            {providers &&
+            {providers ? (
               Object.values(providers).map(
                 (
                   provider: any /*Disable type checking until I figure out nextauth+typescript*/
@@ -84,7 +85,15 @@ const Header = () => {
                     Sign In
                   </button>
                 )
-              )}
+              )
+            ) : (
+              <button
+                type="button"
+                className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-slate-600 dark:from-inherit lg:mx-2 lg:w-auto"
+              >
+                Sign In
+              </button>
+            )}
           </>
         )}
       </div>
