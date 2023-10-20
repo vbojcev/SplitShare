@@ -21,7 +21,7 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className="z-10 flex w-full flex-col justify-center px-4 py-2 font-mono text-sm lg:flex-row lg:border-b-2 lg:bg-zinc-800 lg:px-24 lg:py-4">
+    <nav className="z-10 flex w-full flex-col justify-center px-4 py-2 font-mono text-sm lg:fixed lg:flex-row lg:border-b-2 lg:bg-zinc-800 lg:px-24 lg:py-2">
       <div className="flex w-full max-w-7xl flex-col items-center justify-between lg:flex-row ">
         <Link
           href="/"
@@ -29,7 +29,7 @@ const Header = () => {
         >
           SplitShare
         </Link>
-        <div className="relative  z-10 w-full max-w-lg items-center align-middle font-mono text-sm lg:flex lg:justify-end">
+        <div className="relative z-10 w-full max-w-lg items-center align-middle font-mono text-sm lg:flex lg:justify-end">
           {/*{session?.user ? (
           <HeaderElement text={'Profile'} route={'/profile'} />
         ) : (

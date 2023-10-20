@@ -24,7 +24,9 @@ export default function RootLayout({
           <main className="flex min-h-screen flex-col items-center justify-between font-mono ">
             {/*Header and Footer are present at all times => render in root layout */}
             <Header />
-            {children}
+            <div className="mt-24 flex w-full items-center justify-center px-4 py-4 lg:max-w-7xl">
+              {children}
+            </div>
             <Footer />
           </main>
         </Provider>
