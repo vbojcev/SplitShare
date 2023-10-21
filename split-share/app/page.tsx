@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <>
-      <div className="relative max-w-3xl place-items-center">
+      <div className="relative mx-12 max-w-3xl place-items-center">
         <h1 className={'my-2 flex justify-center'}>Introduction</h1>
         <p>
           SplitShare is a platform where you can easily create, browse, and save
