@@ -182,3 +182,21 @@ Ended up fixing it by adding session to the dependency array. This works because
 ## 10/06/23
 
 The current goal is to add documentation and start enforcing typescript features.
+
+## 31/10/23
+
+Gonna try to migrate to a SQL-based DB. Should look into prisma: https://www.prisma.io/.
+
+## 1/11/23
+
+Found out about the [Vercel CLI](https://vercel.com/docs/cli).
+
+Because of my weird file structure, to initialize the Vercel CLI and link the project I had to do so in the root directory because when I tried it in SplitShare/split-share/ it would make a new project in Vercel. But now when I use the CLI to get the environment variables it puts the .env.development.local in the root directory where it's not visible by the code. I could specify the file path but if I have to do that in multiple files then I think I'll just manually copy.
+
+Now I'm deciding whether to use prisma or next.js's built-in SQL functionality... I think I'll use the nextjs postgres SDK: [docs](https://vercel.com/docs/storage/vercel-postgres).
+
+## 2/11/23
+
+Sike, I'm gonna use Supabase. Looks like it has more free features and I could even migrte my authentication over.
+
+[Supabse with nextjs](https://supabase.com/docs/guides/getting-started/quickstarts/nextjs)
