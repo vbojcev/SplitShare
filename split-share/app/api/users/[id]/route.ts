@@ -4,6 +4,33 @@ import { connectToDB } from '@/utils/database';
 import { authOptions } from '../../auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth/next';
 
+// Get user name from ID
+
+export const GET = async (
+  request: Request,
+  { params }: { params: { id: string } }
+) => {
+  try {
+    await connectToDB();
+
+    const user = await User.findById(params.id);
+
+    if (!user) {
+      return new Response(JSON.stringify({ msg: 'user not found' }), {
+        status: 404,
+      });
+    }
+
+    return new Response(JSON.stringify(user), {
+      status: 200,
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ msg: 'Failed to fetch workout' }), {
+      status: 500,
+    });
+  }
+};
+
 // Change username
 export const PUT = async (
   request: Request,

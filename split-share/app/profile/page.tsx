@@ -12,12 +12,25 @@ import { Router } from 'next/router';
 const Profile = () => {
   const [workouts, setWorkouts] = useState<Iworkout[]>([]);
   const [savedWorkouts, setSavedWorkouts] = useState<Iworkout[]>([]);
+  const [username, setUsername] = useState<String>('');
   //pull user session:
   const { data: session } = useSession();
 
   const router = useRouter();
 
   useEffect(() => {
+    const fetchUserName = async () => {
+      const response = await fetch(`/api/users/${session?.user.id}`, {
+        cache: 'no-store',
+      });
+      if (response.ok) {
+        const user = await response.json();
+        setUsername(user.username);
+      } else {
+        setUsername('MISSING USERNAME');
+      }
+    };
+
     const fetchWorkouts = async () => {
       const response = await fetch(`/api/users/${session?.user.id}/workouts`, {
         cache: 'no-store',
@@ -49,13 +62,14 @@ const Profile = () => {
 
     fetchWorkouts();
     fetchSaved();
+    fetchUserName();
   }, [session?.user]);
 
   return (
     <>
       {session?.user ? (
         <div className="relative flex w-full flex-col place-items-center gap-2">
-          <h1>{session.user.name}'s profile</h1>
+          <h1>{username}'s Profile</h1>
           <Link
             href={'/profile/create-workout'}
             className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
