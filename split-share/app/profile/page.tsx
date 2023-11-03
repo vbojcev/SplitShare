@@ -1,5 +1,5 @@
 'use client';
-import { useSession } from 'next-auth/react';
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -26,7 +26,7 @@ const Profile = () => {
         const user = await response.json();
         setUsername(user.username);
       } else {
-        setUsername('MISSING USERNAME');
+        setUsername('');
       }
     };
 
@@ -66,9 +66,17 @@ const Profile = () => {
 
   return (
     <>
-      {session?.user ? (
+      {/* the '&& username prevents the page displaying before the username has been fully fetched. Otherwise there's " 's Profile" at the top of the page.*/}
+      {session?.user && username ? (
         <div className="relative flex w-full flex-col place-items-center gap-2">
           <h1>{username}'s Profile</h1>
+          <button
+            className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-auto"
+            type="button"
+            onClick={() => signOut()}
+          >
+            Sign Out
+          </button>
           <Link
             href={'/profile/create-workout'}
             className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
