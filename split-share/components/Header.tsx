@@ -36,7 +36,7 @@ const Header = () => {
           <></>
         )}*/}
           {/*If user logged in and has profile picture, display it. Otherwise, placeholder. */}
-          {session?.user ? (
+          {/*session?.user ? (
             <div className="relative flex justify-center">
               <Link
                 href={'/profile'}
@@ -60,45 +60,24 @@ const Header = () => {
             </div>
           ) : (
             <></>
-          )}
+          )*/}
           <HeaderElement text={'Browse Workouts'} route={'/browse'} />
 
           {/*Note for future self: the button has w-full AND lg:w-auto unlike the HeaderElements because w-auto means different things for buttons vs other things. */}
           {session?.user ? (
-            <button
-              className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-auto"
-              type="button"
-              onClick={() => signOut()}
+            <Link
+              href={'/profile'}
+              className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
             >
-              Sign Out
-            </button>
+              Profile
+            </Link>
           ) : (
-            <>
-              {/*Map all providers each to a button*/}
-              {providers ? (
-                Object.values(providers).map(
-                  (
-                    provider: any /*Disable type checking until I figure out nextauth+typescript*/
-                  ) => (
-                    <button
-                      type="button"
-                      key={provider.name}
-                      onClick={() => signIn(provider.id)}
-                      className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-auto"
-                    >
-                      Sign In
-                    </button>
-                  )
-                )
-              ) : (
-                <button
-                  type="button"
-                  className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-slate-600 dark:from-inherit lg:mx-2 lg:w-auto"
-                >
-                  Sign In
-                </button>
-              )}
-            </>
+            <Link
+              href={'/login'}
+              className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+            >
+              Sign In
+            </Link>
           )}
         </div>
       </div>
