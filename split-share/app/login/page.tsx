@@ -1,13 +1,15 @@
+'use client';
+
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const page = () => {
 
   //pull user session:
   const { data: session } = useSession();
 
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
 
@@ -16,7 +18,7 @@ const page = () => {
       router.push('/');
     }
 
-  }, []);
+  }, [session?.user]);
 
   return (
     <div className="relative flex place-items-center">

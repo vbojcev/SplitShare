@@ -7,7 +7,6 @@ import Link from 'next/link';
 import WorkoutCard from '@/components/WorkoutCard';
 
 import { Iworkout } from '@/types/types';
-import { Router } from 'next/router';
 
 const Profile = () => {
   const [workouts, setWorkouts] = useState<Iworkout[]>([]);
