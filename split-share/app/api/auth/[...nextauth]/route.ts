@@ -19,6 +19,12 @@ export const authOptions: NextAuthOptions = {
       const sessionUser = await User.findOne({ email: session.user.email });
 
       session.user.id = sessionUser._id.toString();
+
+      // Commenting this line makes user.image = Google profile image. For future changes...
+      //session.user.image = sessionUser.image;
+
+      // Overriding the name member provided by Google:
+      session.user.name = sessionUser.username;
       return session;
     },
     async signIn({ profile }) {
@@ -32,7 +38,7 @@ export const authOptions: NextAuthOptions = {
           await User.create({
             email: profile?.email,
             username: profile?.name?.replace(/\s/g, '').toLowerCase(),
-            image: profile?.image,
+            image: profile?.image ? profile.image : 'placeholder',
           });
         }
         //exit

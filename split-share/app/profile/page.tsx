@@ -11,13 +11,17 @@ import { Iworkout } from '@/types/types';
 const Profile = () => {
   const [workouts, setWorkouts] = useState<Iworkout[]>([]);
   const [savedWorkouts, setSavedWorkouts] = useState<Iworkout[]>([]);
-  const [username, setUsername] = useState<String>('');
+
+  // Deprecated: see below
+  //const [username, setUsername] = useState<String>('');
   //pull user session:
   const { data: session } = useSession();
 
   const router = useRouter();
 
   useEffect(() => {
+    // Deprecated: simple changed the session.user.name member to be overridden to username upon sign-in instead of full actual name :D
+    /* 
     const fetchUserName = async () => {
       const response = await fetch(`/api/users/${session?.user.id}`, {
         cache: 'no-store',
@@ -28,7 +32,7 @@ const Profile = () => {
       } else {
         setUsername('');
       }
-    };
+    };*/
 
     const fetchWorkouts = async () => {
       const response = await fetch(`/api/users/${session?.user.id}/workouts`, {
@@ -55,21 +59,24 @@ const Profile = () => {
       }
     };
 
+    // Debug purposes.
     if (!session?.user) {
       router.push('/');
+    } else {
+      console.log(session);
     }
 
     fetchWorkouts();
     fetchSaved();
-    fetchUserName();
+    //fetchUserName();
   }, [session?.user]);
 
   return (
     <>
       {/* the '&& username prevents the page displaying before the username has been fully fetched. Otherwise there's " 's Profile" at the top of the page.*/}
-      {session?.user && username ? (
+      {session?.user ? (
         <div className="relative flex w-full flex-col place-items-center gap-2">
-          <h1>{username}'s Profile</h1>
+          <h1>{session.user.name}'s Profile</h1>
           <button
             className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-auto"
             type="button"
