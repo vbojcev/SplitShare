@@ -214,3 +214,25 @@ Some usefule links for implementing email + password auth:
 [4](https://www.youtube.com/watch?v=PEMfsqZ2-As)
 
 It seems to be highly recommended against, so I think I'll just stick with email magic links, maybe github too.
+
+## 6/11/23
+
+Installed nodemailer to use for ppl who don't have a Google account. I think I'll definitely stay away from username+password for now. Also looked at domains on vercel, there's a few good options for $20-$50 per year.
+
+[Nodemailer Docs](https://community.nodemailer.com/2-0-0-beta/setup-smtp/well-known-services/).
+
+Tried installing the next auth mongo adapter: [docs](https://authjs.dev/reference/adapter/mongodb). Turns out I need mongodb version 6, [upgrade docs](https://github.com/mongodb/node-mongodb-native/blob/HEAD/etc/notes/CHANGES_6.0.0.md). So I just updated all modules and I'm praying it works lol.
+
+Relevant mongodb next app example : [link](https://github.com/vercel/next.js/tree/canary/examples/with-mongodb).
+
+[Next Auth Adapters API Reference](https://authjs.dev/reference/core/adapters)
+
+[Next Auth Adapters Guide](https://authjs.dev/getting-started/adapters)
+
+[MongoDB adapter guide](https://authjs.dev/reference/adapter/mongodb)
+
+The mongodb adapter guide doesn't have the whole model schema thing that the prisma one does so I don't know how it's gonna work. Do I need to setup my users schema to match that? Do I need to add the account, session, and VerificationToken Schemas???
+
+[Relevant youtube video about email magic link login](https://www.youtube.com/watch?v=C6eH6zsPgSk)
+
+[Updated Auth.js Email provider](https://authjs.dev/guides/providers/email). Contains a suggestion to use Forward Email as a provider unlike the old NextAuth docs.
