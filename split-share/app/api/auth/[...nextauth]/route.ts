@@ -2,15 +2,30 @@ import { Session } from 'next-auth';
 import type { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import EmailProvider from 'next-auth/providers/email';
 import { connectToDB } from '@/utils/database';
 import User from '@/models/user';
 
+import { MongoDBAdapter } from '@auth/mongodb-adapter';
+import clientPromise from '@/utils/mongodb';
+
 export const authOptions: NextAuthOptions = {
+  adapter: MongoDBAdapter(clientPromise),
+
   providers: [
-    // I plan to add more providers (at least a standard email+password method) in the future.
+    // Google
+
     GoogleProvider({
       clientId: String(process.env.GOOGLE_ID),
       clientSecret: String(process.env.GOOGLE_CLIENT_SECRET),
+    }),
+
+    // Magic Email Links
+
+    EmailProvider({
+      server: String(process.env.EMAIL_SERVER),
+      from: String(process.env.EMAIL_FROM),
+      maxAge: 30 * 60, // How long email links are valid for in seconds
     }),
   ],
   secret: process.env.NEXT_AUTH_SECRET,
