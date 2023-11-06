@@ -200,3 +200,17 @@ Now I'm deciding whether to use prisma or next.js's built-in SQL functionality..
 Sike, I'm gonna use Supabase. Looks like it has more free features and I could even migrte my authentication over.
 
 [Supabse with nextjs](https://supabase.com/docs/guides/getting-started/quickstarts/nextjs)
+
+## 5/11/23
+
+Some usefule links for implementing email + password auth:
+
+[1](https://www.reddit.com/r/nextjs/comments/13c31xd/whats_the_best_way_to_implement_emailpassword/)
+
+[2](https://www.reddit.com/r/nextjs/comments/161txhh/is_nextauth_authjs_well_suited_for_an/)
+
+[3](https://github.com/ixartz/Next-js-Boilerplate)
+
+[4](https://www.youtube.com/watch?v=PEMfsqZ2-As)
+
+It seems to be highly recommended against, so I think I'll just stick with email magic links, maybe github too.
