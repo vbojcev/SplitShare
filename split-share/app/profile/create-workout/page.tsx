@@ -141,7 +141,21 @@ const CreateWorkout = () => {
   };
 
   const removeExercise = (ExId: number) => {
-    console.log('removing...');
+    //  This is admittedly pretty janky. But it works for now. I'll add it as an issue to look at later.
+
+    let newExercises = [];
+
+    for (let i = 0; i < exercises.length; i++) {
+      if (exercises[i].id != ExId) {
+        newExercises.push(exercises[i]);
+      }
+    }
+
+    for (let i = 0; i < newExercises.length; i++) {
+      newExercises[i].id = i + 1;
+    }
+
+    setExercises(newExercises);
   };
 
   const cancel: MouseEventHandler = () => router.push('/profile');
