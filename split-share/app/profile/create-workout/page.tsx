@@ -140,6 +140,24 @@ const CreateWorkout = () => {
     );
   };
 
+  const removeExercise = (ExId: number) => {
+    //  This is admittedly pretty janky. But it works for now. I'll add it as an issue to look at later.
+
+    let newExercises = [];
+
+    for (let i = 0; i < exercises.length; i++) {
+      if (exercises[i].id != ExId) {
+        newExercises.push(exercises[i]);
+      }
+    }
+
+    for (let i = 0; i < newExercises.length; i++) {
+      newExercises[i].id = i + 1;
+    }
+
+    setExercises(newExercises);
+  };
+
   const cancel: MouseEventHandler = () => router.push('/profile');
 
   return (
@@ -182,12 +200,27 @@ const CreateWorkout = () => {
                 return (
                   <div key={ex.id}>
                     <label className="flex flex-col">
-                      <span className="font-semibold">Exercise {ex.id}</span>
+                      <span className="flex flex-row justify-between">
+                        <div className="flex flex-col justify-center">
+                          <p className="font-semibold">Exercise {ex.id}</p>
+                        </div>
+                        {ex.id > 1 ? (
+                          <button
+                            type="button"
+                            onClick={() => removeExercise(ex.id)}
+                            className="static flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 px-2 py-1 dark:border-gray-300 dark:bg-rose-800 dark:from-inherit lg:w-auto"
+                          >
+                            Remove
+                          </button>
+                        ) : (
+                          <></>
+                        )}
+                      </span>
                       <input
+                        type="text"
                         className="mt-3 rounded-xl border-2 p-1 dark:border-gray-300 dark:bg-gray-700 dark:placeholder:text-gray-300"
                         value={ex.name}
                         onChange={(e) => handleExName(ex.id, e.target.value)}
-                        type="text"
                         placeholder={`Exercise ${ex.id} name`}
                         required
                       />
