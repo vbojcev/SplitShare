@@ -33,6 +33,37 @@ export const GET = async (
   }
 };
 
+// Edit a workout
+
+export const PUT = async (
+  request: Request,
+  { params }: { params: { id: string } }
+) => {
+  const { description, exercises, tags } = await request.json();
+
+  try {
+    await connectToDB();
+
+    const session = await getServerSession(authOptions);
+
+    const workout = await Workout.findById(params.id);
+
+    if (session?.user.id == workout.creator._id) {
+      workout.exercises = exercises;
+      workout.description = description;
+      workout.tags = tags;
+
+      await workout.save();
+    } else {
+      return new Response('Unauthorized', { status: 401 });
+    }
+
+    return new Response('Successfully updated workout.', { status: 200 });
+  } catch {
+    return new Response('Failed to update workout', { status: 500 });
+  }
+};
+
 // Delete a workout
 export const DELETE = async (
   request: Request,
