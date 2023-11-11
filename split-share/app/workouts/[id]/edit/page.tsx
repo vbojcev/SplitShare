@@ -49,6 +49,7 @@ const EditWorkout = ({ params }: { params: { id: string } }) => {
         if (response.ok) {
           const initWorkout = await response.json();
           setWorkout(initWorkout);
+          setExercises(initWorkout.exercises);
         } else {
           throw new Error('no workout found under that ID.');
         }
@@ -172,31 +173,18 @@ const EditWorkout = ({ params }: { params: { id: string } }) => {
     setExercises(newExercises);
   };
 
-  const cancel: MouseEventHandler = () => router.push('/profile');
+  const cancel: MouseEventHandler = () => router.push(`/workouts/${params.id}`);
 
   return (
     <>
       {session?.user.id /*== workout.creator._id*/ ? (
         <div className="flex w-full max-w-3xl flex-col">
           <section className="mt-4 flex w-full max-w-full flex-col items-center">
-            <h1>Create a Workout</h1>
+            <h1>Edit {workout.name}</h1>
             <form
               onSubmit={updateWorkout}
               className={'mt-5 flex w-full max-w-3xl flex-col gap-8'}
             >
-              <label className="flex flex-col">
-                <span className="font-semibold">Workout Name</span>
-                <input
-                  className="mt-3 rounded-xl border-2 p-1 dark:border-gray-300 dark:bg-gray-700 dark:placeholder:text-gray-300"
-                  value={workout.name}
-                  onChange={(e) =>
-                    setWorkout({ ...workout, name: e.target.value })
-                  }
-                  type="text"
-                  placeholder="Workout name"
-                  required
-                />
-              </label>
               <label className="flex flex-col">
                 <span className="font-semibold">Workout Description</span>
 

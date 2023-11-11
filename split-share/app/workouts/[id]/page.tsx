@@ -160,7 +160,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
                 Delete
               </button>
               <Link
-                href={`workouts/${params.id}/edit`}
+                href={`/workouts/${params.id}/edit`}
                 className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
               >
                 Edit
