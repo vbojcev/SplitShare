@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 import { Iworkout } from '@/types/types';
+import Link from 'next/link';
 
 const Workout = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
@@ -151,12 +152,20 @@ const Workout = ({ params }: { params: { id: string } }) => {
             );
           })}
           {session?.user.id == workout.creator._id ? (
-            <button
-              onClick={deleteWorkout}
-              className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-rose-800 dark:from-inherit lg:mx-2"
-            >
-              Delete
-            </button>
+            <div>
+              <button
+                onClick={deleteWorkout}
+                className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-rose-800 dark:from-inherit lg:mx-2"
+              >
+                Delete
+              </button>
+              <Link
+                href={`workouts/${params.id}/edit`}
+                className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+              >
+                Edit
+              </Link>
+            </div>
           ) : (
             <></>
           )}
