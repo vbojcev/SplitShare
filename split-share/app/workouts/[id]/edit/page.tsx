@@ -19,7 +19,9 @@ const EditWorkout = ({ params }: { params: { id: string } }) => {
 
   const router = useRouter();
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const [loading, setLoading] = useState<boolean>(true);
 
   const [workout, setWorkout] = useState<Iworkout>({
     _id: '',
@@ -50,6 +52,7 @@ const EditWorkout = ({ params }: { params: { id: string } }) => {
           const initWorkout = await response.json();
           setWorkout(initWorkout);
           setExercises(initWorkout.exercises);
+          setLoading(false);
         } else {
           throw new Error('no workout found under that ID.');
         }
@@ -177,7 +180,7 @@ const EditWorkout = ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      {session?.user.id /*== workout.creator._id*/ ? (
+      {session?.user.id && !loading /*== workout.creator._id*/ ? (
         <div className="flex w-full max-w-3xl flex-col">
           <section className="mt-4 flex w-full max-w-full flex-col items-center">
             <h1>Edit {workout.name}</h1>
