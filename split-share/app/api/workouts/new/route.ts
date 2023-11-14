@@ -47,6 +47,6 @@ export const POST = async (request: Request) => {
     await newWorkout.save();
     return new Response(JSON.stringify(newWorkout), { status: 201 });
   } catch (error) {
-    return new Response('Failed to create prompt', { status: 500 });
+    return new Response('Failed to create workout', { status: 500 });
   }
 };
