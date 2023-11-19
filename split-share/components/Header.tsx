@@ -21,7 +21,7 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className="z-10 flex w-full flex-col justify-center px-4 py-2 font-mono text-sm lg:fixed lg:flex-row lg:border-b-2 lg:bg-zinc-800 lg:px-24 lg:py-2">
+    <nav className="z-10 flex w-full flex-col justify-center border-b-2 bg-zinc-800 px-4 py-2 font-mono text-sm lg:fixed lg:flex-row lg:px-24 lg:py-2">
       <div className="flex w-full max-w-7xl flex-col items-center justify-between lg:flex-row ">
         <Link
           href="/"
@@ -65,19 +65,9 @@ const Header = () => {
 
           {/*Note for future self: the button has w-full AND lg:w-auto unlike the HeaderElements because w-auto means different things for buttons vs other things. */}
           {session?.user ? (
-            <Link
-              href={'/profile'}
-              className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
-            >
-              Profile
-            </Link>
+            <HeaderElement text={'Profile'} route={'/profile'}></HeaderElement>
           ) : (
-            <Link
-              href={'/login'}
-              className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
-            >
-              Sign In
-            </Link>
+            <HeaderElement text={'Sign In'} route={'/login'}></HeaderElement>
           )}
         </div>
       </div>
@@ -89,7 +79,7 @@ const HeaderElement = ({ text, route }: { text: string; route: string }) => {
   return (
     <Link
       href={route}
-      className="dark:bg static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+      className="static my-1 flex w-auto justify-center rounded-lg border border-black bg-gray-200 p-3 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
     >
       {text}
     </Link>

@@ -10,6 +10,7 @@ import {
 import { useRouter } from 'next/navigation';
 
 import { Iuser } from '@/types/types';
+import Button from '@/components/Button';
 
 const ChangeUsername = () => {
   //pull user session:
@@ -83,16 +84,11 @@ const ChangeUsername = () => {
                 />
               </label>
               <div className="flex flex-row justify-end">
-                <button
-                  onClick={cancel}
-                  className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-rose-800 dark:from-inherit lg:mx-2 lg:w-auto"
-                >
-                  Cancel
-                </button>
+                <Button action={cancel} text={'Cancel'}></Button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-auto"
+                  className="static m-3 flex h-fit w-auto justify-center rounded-lg border border-black bg-gray-200 p-2 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>

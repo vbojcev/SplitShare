@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
+import Button from '@/components/Button';
+
 import { Iworkout } from '@/types/types';
 import Link from 'next/link';
 
@@ -153,18 +155,11 @@ const Workout = ({ params }: { params: { id: string } }) => {
           })}
           {session?.user.id == workout.creator._id ? (
             <div>
-              <button
-                onClick={deleteWorkout}
-                className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-rose-800 dark:from-inherit lg:mx-2"
-              >
-                Delete
-              </button>
-              <Link
-                href={`/workouts/${params.id}/edit`}
-                className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
-              >
-                Edit
-              </Link>
+              <Button action={deleteWorkout} text={'Delete'}></Button>
+              <Button
+                action={() => router.push(`/workouts/${params.id}/edit`)}
+                text={'Edit'}
+              ></Button>
             </div>
           ) : (
             <></>
@@ -173,19 +168,9 @@ const Workout = ({ params }: { params: { id: string } }) => {
           {/*Otherwise, show the "save" button if the user doesn't have the post saved or the "unsave" button if they do. */}
           {session && session?.user.id !== workout.creator._id ? (
             postSaved ? (
-              <button
-                onClick={unSaveWorkout}
-                className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
-              >
-                Unsave Workout
-              </button>
+              <Button action={unSaveWorkout} text={'Unsave Workout'}></Button>
             ) : (
-              <button
-                onClick={saveWorkout}
-                className="static m-3 flex h-fit w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
-              >
-                Save Workout
-              </button>
+              <Button action={saveWorkout} text={'Save Workout'}></Button>
             )
           ) : (
             <></>
