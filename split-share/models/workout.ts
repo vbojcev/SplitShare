@@ -48,7 +48,7 @@ const WorkoutSchema = new Schema({
   },
 });
 
-WorkoutSchema.index({ name: 'text', description: 'text' });
+WorkoutSchema.index({ name: 'text' });
 
 //Have to make this check because NextJS uses a cold start for routes.
 const Workout = models.Workout || model('Workout', WorkoutSchema);
