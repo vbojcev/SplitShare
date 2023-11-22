@@ -174,7 +174,7 @@ const CreateWorkout = () => {
               <label className="flex flex-col">
                 <span className="font-semibold">Workout Name</span>
                 <input
-                  className="mt-3 rounded-xl border-2 p-1 dark:border-gray-300 dark:bg-gray-700 dark:placeholder:text-gray-300"
+                  className="mt-3 rounded-xl border-2 border-gray-300 bg-gray-700 p-1 placeholder:text-gray-300"
                   value={workout.name}
                   onChange={(e) =>
                     setWorkout({ ...workout, name: e.target.value })
@@ -188,7 +188,7 @@ const CreateWorkout = () => {
                 <span className="font-semibold">Workout Description</span>
 
                 <textarea
-                  className="mt-3 rounded-xl border-2 p-1 dark:border-gray-300 dark:bg-gray-700 dark:placeholder:text-gray-300"
+                  className="mt-3 rounded-xl border-2 border-gray-300 bg-gray-700 p-1 placeholder:text-gray-300"
                   value={workout.description}
                   onChange={(e) =>
                     setWorkout({ ...workout, description: e.target.value })
@@ -216,7 +216,7 @@ const CreateWorkout = () => {
                       </span>
                       <input
                         type="text"
-                        className="mt-3 rounded-xl border-2 p-1 dark:border-gray-300 dark:bg-gray-700 dark:placeholder:text-gray-300"
+                        className="mt-3 rounded-xl border-2 border-gray-300 bg-gray-700 p-1 placeholder:text-gray-300"
                         value={ex.name}
                         onChange={(e) => handleExName(ex.id, e.target.value)}
                         placeholder={`Exercise ${ex.id} name`}
@@ -230,7 +230,7 @@ const CreateWorkout = () => {
                           type="number"
                           min="1"
                           max="99"
-                          className="mt-3 w-fit rounded-xl border-2 p-1 dark:border-gray-300 dark:bg-gray-700 dark:placeholder:text-gray-300"
+                          className="mt-3 w-fit rounded-xl border-2 border-gray-300 bg-gray-700 p-1 placeholder:text-gray-300"
                           value={ex.sets}
                           onChange={(e) =>
                             handleExSets(ex.id, parseInt(e.target.value))
@@ -244,7 +244,7 @@ const CreateWorkout = () => {
                           type="number"
                           min="1"
                           max="99"
-                          className="mt-3 rounded-xl border-2 p-1 dark:border-gray-300 dark:bg-gray-700 dark:placeholder:text-gray-300"
+                          className="mt-3 rounded-xl border-2 border-gray-300 bg-gray-700 p-1 placeholder:text-gray-300"
                           value={ex.reps}
                           onChange={(e) =>
                             handleExReps(ex.id, parseInt(e.target.value))
@@ -255,7 +255,7 @@ const CreateWorkout = () => {
                     </label>
                     <label className="flex flex-col">
                       <textarea
-                        className="mt-3 rounded-xl border-2 p-1 dark:border-gray-300 dark:bg-gray-700 dark:placeholder:text-gray-300"
+                        className="mt-3 rounded-xl border-2 border-gray-300 bg-gray-700 p-1 placeholder:text-gray-300"
                         value={ex.note}
                         onChange={(e) => handleExNote(ex.id, e.target.value)}
                         placeholder={`Exercise ${ex.id} notes`}
@@ -271,7 +271,7 @@ const CreateWorkout = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="static m-3 flex h-fit w-auto justify-center rounded-lg border border-black border-transparent bg-gray-200 p-2 hover:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+                  className="static m-3 flex h-fit w-auto justify-center rounded-lg border border-black border-transparent  bg-button-bg from-inherit p-2 hover:border-gray-300 lg:mx-2"
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>

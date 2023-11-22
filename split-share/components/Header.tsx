@@ -79,7 +79,7 @@ const HeaderElement = ({ text, route }: { text: string; route: string }) => {
   return (
     <Link
       href={route}
-      className="static my-1 flex w-auto justify-center rounded-lg border border-black bg-gray-200 p-3 backdrop-blur-2xl hover:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+      className="static my-1 flex w-auto justify-center rounded-lg border border-black  bg-button-bg from-inherit p-3 backdrop-blur-2xl hover:border-gray-300 lg:mx-2"
     >
       {text}
     </Link>
