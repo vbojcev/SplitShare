@@ -132,7 +132,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
   return (
     <>
       {!loading ? (
-        <div className="relative flex w-full max-w-3xl flex-col place-items-center">
+        <div className="relative flex w-full max-w-3xl flex-col place-items-center lg:rounded-xl lg:border lg:bg-header-bg lg:p-16">
           <div className="flex w-full flex-col justify-center">
             <h1 className="text-center">{workout.name}</h1>
             <h2 className="text-center">
@@ -143,7 +143,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
           {workout.exercises.map((ex) => {
             return (
               <div className="mt-6 w-full" key={ex.id}>
-                <h2>
+                <h2 className="border-b">
                   Exercise {ex.id}: {ex.name}
                 </h2>
                 <h2>
@@ -154,7 +154,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
             );
           })}
           {session?.user.id == workout.creator._id ? (
-            <div>
+            <div className="flex flex-row justify-center">
               <Button action={deleteWorkout} text={'Delete'}></Button>
               <Button
                 action={() => router.push(`/workouts/${params.id}/edit`)}

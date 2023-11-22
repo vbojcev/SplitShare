@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <nav className="z-10 flex w-full flex-col justify-center border-b-2 bg-header-bg px-4 py-2 font-mono text-sm lg:fixed lg:flex-row lg:px-24 lg:py-2">
-      <div className="flex w-full max-w-7xl flex-col items-center justify-between lg:flex-row ">
+      <div className="flex w-full max-w-7xl flex-col items-center justify-between px-12 lg:flex-row">
         <Link
           href="/"
           className="flex w-auto justify-center text-4xl font-bold"
