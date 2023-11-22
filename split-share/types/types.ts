@@ -21,4 +21,5 @@ export interface Iworkout {
   description: string;
   exercises: /*string[] | */ Iexercise[];
   tags: string[];
+  saves: number;
 }

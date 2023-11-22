@@ -4,13 +4,17 @@ import { useState, useEffect } from 'react';
 
 import WorkoutCard from '@/components/WorkoutCard';
 import { Iworkout } from '@/types/types';
+import { json } from 'stream/consumers';
 
 const page = () => {
   const [workouts, setWorkouts] = useState([]);
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch('/api/workouts/all', { cache: 'no-store' });
+      const response = await fetch('/api/workouts/all', {
+        method: 'GET',
+        cache: 'no-store',
+      });
       const data = await response.json();
       setWorkouts(data);
     };
@@ -27,6 +31,7 @@ const page = () => {
           name={workout.name}
           description={workout.description}
           id={workout._id}
+          saves={workout.saves}
         />
       ))}
     </div>

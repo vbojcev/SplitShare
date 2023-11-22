@@ -7,18 +7,17 @@ import { useSession } from 'next-auth/react';
 import Button from '@/components/Button';
 
 import { Iworkout } from '@/types/types';
-import Link from 'next/link';
 
 const Workout = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
 
   const { data: session } = useSession();
 
-  const [deleted, setDeleted] = useState(false);
+  const [deleted, setDeleted] = useState<Boolean>(false);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<Boolean>(true);
 
-  const [postSaved, setPostSaved] = useState(false);
+  const [postSaved, setPostSaved] = useState<Boolean>(false);
 
   const [workout, setWorkout] = useState<Iworkout>({
     _id: '',
@@ -27,6 +26,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
     description: '',
     exercises: [{ id: 0, name: '', sets: 1, reps: 1, note: '' }],
     tags: [],
+    saves: 0,
   });
 
   const deleteWorkout = async () => {
@@ -127,7 +127,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
 
     fetchWorkout();
     checkSaved();
-  }, [deleted, session]);
+  }, [deleted, session, postSaved]);
 
   return (
     <>
@@ -138,6 +138,7 @@ const Workout = ({ params }: { params: { id: string } }) => {
             <h2 className="text-center">
               Created by {workout.creator.username}
             </h2>
+            <p className="text-center">{workout.saves} saves</p>
           </div>
           <p className="mt-4 w-full">{workout.description}</p>
           {workout.exercises.map((ex) => {

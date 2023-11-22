@@ -6,6 +6,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth/next';
 
 import { Iuser } from '@/types/types';
+import { Iworkout } from '@/types/types';
 
 //return all workouts that a user has saved
 export const GET = async (
@@ -73,7 +74,9 @@ export const POST = async (
       );
     } else {
       user.savedWorkouts.push(workoutId);
+      workout.saves += 1;
 
+      await workout.save();
       await user.save();
     }
 
@@ -95,11 +98,16 @@ export const PATCH = async (
     const { workoutId } = await request.json();
     const session = await getServerSession(authOptions);
 
-    //ensure user exists
+    //ensure user and workout exist
     const user = await User.findById(session?.user.id);
+    const workout = await Workout.findById(workoutId);
 
     if (!user) {
       return new Response(JSON.stringify({ msg: 'User not found.' }), {
+        status: 500,
+      });
+    } else if (!workout) {
+      return new Response(JSON.stringify({ msg: 'Workout not found.' }), {
         status: 500,
       });
     }
@@ -111,6 +119,9 @@ export const PATCH = async (
       //remove from array
       user.savedWorkouts.splice(indexOfWorkout, 1);
       await user.save();
+
+      workout.saves -= 1;
+      await workout.save();
 
       return new Response(
         JSON.stringify({ msg: 'Post successfully unsaved.' }),

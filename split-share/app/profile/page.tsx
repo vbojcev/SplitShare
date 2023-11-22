@@ -80,6 +80,7 @@ const Profile = () => {
                   name={workout.name}
                   description={workout.description}
                   id={workout._id}
+                  saves={workout.saves}
                 />
               </div>
             ))}
@@ -93,6 +94,7 @@ const Profile = () => {
                 name={workout.name}
                 description={workout.description}
                 id={workout._id}
+                saves={workout.saves}
               />
             </div>
           ))}
