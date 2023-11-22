@@ -13,28 +13,12 @@ const Profile = () => {
   const [workouts, setWorkouts] = useState<Iworkout[]>([]);
   const [savedWorkouts, setSavedWorkouts] = useState<Iworkout[]>([]);
 
-  // Deprecated: see below
-  //const [username, setUsername] = useState<String>('');
   //pull user session:
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const router = useRouter();
 
   useEffect(() => {
-    // Deprecated: simple changed the session.user.name member to be overridden to username upon sign-in instead of full actual name :D
-    /* 
-    const fetchUserName = async () => {
-      const response = await fetch(`/api/users/${session?.user.id}`, {
-        cache: 'no-store',
-      });
-      if (response.ok) {
-        const user = await response.json();
-        setUsername(user.username);
-      } else {
-        setUsername('');
-      }
-    };*/
-
     const fetchWorkouts = async () => {
       const response = await fetch(`/api/users/${session?.user.id}/workouts`, {
         cache: 'no-store',
@@ -60,17 +44,16 @@ const Profile = () => {
       }
     };
 
-    // Debug purposes.
-    if (!session?.user) {
-      router.push('/');
-    } else {
-      console.log(session);
-    }
-
     fetchWorkouts();
     fetchSaved();
-    //fetchUserName();
-  }, [session?.user]);
+
+    (async () => {
+      //if user not logged in, redirect to home
+      if (status == 'unauthenticated') {
+        router.push('/');
+      }
+    })();
+  }, [session?.user, status]);
 
   return (
     <>
@@ -115,7 +98,7 @@ const Profile = () => {
           ))}
         </div>
       ) : (
-        <h1>Redirecting...</h1>
+        <h1>Loading...</h1>
       )}
     </>
   );

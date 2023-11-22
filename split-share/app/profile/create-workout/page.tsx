@@ -16,7 +16,7 @@ import Button from '@/components/Button';
 
 const CreateWorkout = () => {
   //pull user session:
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const router = useRouter();
 
@@ -42,11 +42,11 @@ const CreateWorkout = () => {
   useEffect(() => {
     (async () => {
       //if user not logged in, redirect to home
-      if (!session?.user) {
+      if (status == 'unauthenticated') {
         router.push('/');
       }
     })();
-  }, []);
+  }, [status]);
 
   // Submits the form
   const createWorkout: FormEventHandler = async (e) => {
@@ -271,7 +271,7 @@ const CreateWorkout = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="static m-3 flex h-fit w-auto justify-center rounded-lg border border-black bg-gray-200 p-2 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+                  className="static m-3 flex h-fit w-auto justify-center rounded-lg border border-black border-transparent bg-gray-200 p-2 hover:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>

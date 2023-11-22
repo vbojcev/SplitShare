@@ -16,7 +16,7 @@ import Button from '@/components/Button';
 
 const EditWorkout = ({ params }: { params: { id: string } }) => {
   //pull user session:
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const router = useRouter();
 
@@ -64,7 +64,14 @@ const EditWorkout = ({ params }: { params: { id: string } }) => {
     };
 
     fetchWorkout();
-  }, []);
+
+    (async () => {
+      //if user not logged in, redirect to home
+      if (status == 'unauthenticated') {
+        router.push('/');
+      }
+    })();
+  }, [status]);
 
   // Submits the form
   const updateWorkout: FormEventHandler = async (e) => {
@@ -276,7 +283,7 @@ const EditWorkout = ({ params }: { params: { id: string } }) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="static m-3 flex h-fit w-auto justify-center rounded-lg border border-black bg-gray-200 p-2 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
+                  className="static m-3 flex h-fit w-auto justify-center rounded-lg border border-black border-transparent bg-gray-200 p-2 hover:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
