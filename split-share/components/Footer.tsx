@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <div className="z-10 w-full items-center justify-center py-4 font-mono text-sm lg:flex lg:border-t-2 lg:bg-zinc-800">
+    <div className="z-10 w-full items-center justify-center py-4 font-mono text-sm lg:flex lg:border-t-2 lg:bg-header-bg">
       <FooterLink
         text={'Source Code'}
         link={'https://github.com/vbojcev/SplitShare'}

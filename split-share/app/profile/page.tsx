@@ -7,33 +7,18 @@ import Link from 'next/link';
 import WorkoutCard from '@/components/WorkoutCard';
 
 import { Iworkout } from '@/types/types';
+import Button from '@/components/Button';
 
 const Profile = () => {
   const [workouts, setWorkouts] = useState<Iworkout[]>([]);
   const [savedWorkouts, setSavedWorkouts] = useState<Iworkout[]>([]);
 
-  // Deprecated: see below
-  //const [username, setUsername] = useState<String>('');
   //pull user session:
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const router = useRouter();
 
   useEffect(() => {
-    // Deprecated: simple changed the session.user.name member to be overridden to username upon sign-in instead of full actual name :D
-    /* 
-    const fetchUserName = async () => {
-      const response = await fetch(`/api/users/${session?.user.id}`, {
-        cache: 'no-store',
-      });
-      if (response.ok) {
-        const user = await response.json();
-        setUsername(user.username);
-      } else {
-        setUsername('');
-      }
-    };*/
-
     const fetchWorkouts = async () => {
       const response = await fetch(`/api/users/${session?.user.id}/workouts`, {
         cache: 'no-store',
@@ -59,17 +44,16 @@ const Profile = () => {
       }
     };
 
-    // Debug purposes.
-    if (!session?.user) {
-      router.push('/');
-    } else {
-      console.log(session);
-    }
-
     fetchWorkouts();
     fetchSaved();
-    //fetchUserName();
-  }, [session?.user]);
+
+    (async () => {
+      //if user not logged in, redirect to home
+      if (status == 'unauthenticated') {
+        router.push('/');
+      }
+    })();
+  }, [session?.user, status]);
 
   return (
     <>
@@ -77,25 +61,15 @@ const Profile = () => {
       {session?.user ? (
         <div className="relative flex w-full flex-col place-items-center gap-2">
           <h1>{session.user.name}'s Profile</h1>
-          <button
-            className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-auto"
-            type="button"
-            onClick={() => signOut()}
-          >
-            Sign Out
-          </button>
-          <Link
-            href={'/profile/create-workout'}
-            className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
-          >
-            Create Workout
-          </Link>
-          <Link
-            href={'/profile/change-username'}
-            className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 backdrop-blur-2xl dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
-          >
-            Change Username
-          </Link>
+          <Button action={() => signOut()} text={'Sign Out'}></Button>
+          <Button
+            action={() => router.push('/profile/create-workout')}
+            text={'Create Workout'}
+          ></Button>
+          <Button
+            action={() => router.push('/profile/change-username')}
+            text={'Change Username'}
+          ></Button>
           {workouts.length ? <h1>Created Workouts:</h1> : <h1></h1>}
           <div className="relative flex w-full flex-col place-items-center">
             {workouts?.map((workout: Iworkout) => (
@@ -124,7 +98,7 @@ const Profile = () => {
           ))}
         </div>
       ) : (
-        <h1>Redirecting...</h1>
+        <h1>Loading...</h1>
       )}
     </>
   );

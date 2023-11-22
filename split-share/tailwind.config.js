@@ -15,6 +15,8 @@ module.exports = {
       colors: {
         'button-bg': '#3c3c6e',
         'button-bg-original': '#46468c',
+        'header-bg': '#212121',
+        'body-bg': '#1a1a1a',
       },
     },
   },

@@ -12,10 +12,11 @@ import { useRouter } from 'next/navigation';
 import { Iworkout } from '@/types/types';
 
 import { Iexercise } from '@/types/types';
+import Button from '@/components/Button';
 
 const CreateWorkout = () => {
   //pull user session:
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const router = useRouter();
 
@@ -41,11 +42,11 @@ const CreateWorkout = () => {
   useEffect(() => {
     (async () => {
       //if user not logged in, redirect to home
-      if (!session?.user) {
+      if (status == 'unauthenticated') {
         router.push('/');
       }
     })();
-  }, []);
+  }, [status]);
 
   // Submits the form
   const createWorkout: FormEventHandler = async (e) => {
@@ -205,13 +206,10 @@ const CreateWorkout = () => {
                           <p className="font-semibold">Exercise {ex.id}</p>
                         </div>
                         {ex.id > 1 ? (
-                          <button
-                            type="button"
-                            onClick={() => removeExercise(ex.id)}
-                            className="static flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 px-2 py-1 dark:border-gray-300 dark:bg-rose-800 dark:from-inherit lg:w-auto"
-                          >
-                            Remove
-                          </button>
+                          <Button
+                            action={() => removeExercise(ex.id)}
+                            text={'Remove'}
+                          ></Button>
                         ) : (
                           <></>
                         )}
@@ -266,24 +264,14 @@ const CreateWorkout = () => {
                   </div>
                 );
               })}
-              <button
-                type="button"
-                onClick={addExercise}
-                className="static my-1 flex w-auto justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-fit"
-              >
-                Add Exercise
-              </button>
+              <Button action={addExercise} text={'Add Exercise'}></Button>
+
               <div className="flex flex-row justify-end">
-                <button
-                  onClick={cancel}
-                  className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-rose-800 dark:from-inherit lg:mx-2 lg:w-auto"
-                >
-                  Cancel
-                </button>
+                <Button action={cancel} text={'Cancel'}></Button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="static my-1 flex w-full justify-center rounded-xl border-2 border-black bg-gray-200 p-4 dark:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2 lg:w-auto"
+                  className="static m-3 flex h-fit w-auto justify-center rounded-lg border border-black border-transparent bg-gray-200 p-2 hover:border-gray-300 dark:bg-button-bg dark:from-inherit lg:mx-2"
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
