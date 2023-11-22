@@ -25,7 +25,7 @@ export default function RootLayout({
             {/*Header and Footer are present at all times => render in root layout */}
             <Header />
             {/*<div className="mb-24"></div>*/}
-            <div className="flex w-full grow flex-col items-center justify-start border-l border-r bg-zinc-900 px-4 pb-8 pt-32 align-top lg:max-w-7xl">
+            <div className="flex w-full grow flex-col items-center justify-start bg-zinc-900 px-4 pb-8 pt-32 align-top lg:max-w-7xl lg:border-l lg:border-r">
               {children}
             </div>
             <Footer />
