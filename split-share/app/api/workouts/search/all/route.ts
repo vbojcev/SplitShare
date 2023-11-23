@@ -8,9 +8,6 @@ export const GET = async (request: Request) => {
   try {
     await connectToDB();
 
-    // rewrite to use url variables:
-    // const { name, desc } = await request.json();
-
     const workouts = await Workout.find({}).populate('creator');
 
     return new Response(JSON.stringify(workouts), {
