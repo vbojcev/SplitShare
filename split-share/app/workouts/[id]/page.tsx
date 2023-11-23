@@ -135,7 +135,10 @@ const Workout = ({ params }: { params: { id: string } }) => {
         <div className="relative flex w-full max-w-3xl flex-col place-items-center lg:rounded-xl lg:border lg:bg-header-bg lg:p-16">
           <div className="flex w-full flex-col justify-center">
             <h1 className="text-center">{workout.name}</h1>
-            <h2 className="text-center">
+            <h2
+              className="cursor-pointer text-center"
+              onClick={() => router.push(`/users/${workout.creator._id}`)}
+            >
               Created by {workout.creator.username}
             </h2>
             <p className="text-center">{workout.saves} saves</p>
