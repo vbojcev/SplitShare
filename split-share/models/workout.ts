@@ -41,7 +41,14 @@ const WorkoutSchema = new Schema({
       type: String,
     },
   ],
+  saves: {
+    type: Number,
+    minimum: 0,
+    default: 0,
+  },
 });
+
+WorkoutSchema.index({ name: 'text' });
 
 //Have to make this check because NextJS uses a cold start for routes.
 const Workout = models.Workout || model('Workout', WorkoutSchema);

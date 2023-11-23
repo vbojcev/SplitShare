@@ -31,6 +31,7 @@ export const POST = async (request: Request) => {
       description: description,
       exercises: [],
       tags: tags,
+      saves: 0,
     });
 
     // For each exercise object, create a new entry in the exercises field of the workout.

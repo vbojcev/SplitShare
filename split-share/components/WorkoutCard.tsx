@@ -5,11 +5,13 @@ const WorkoutCard = ({
   name,
   description,
   id,
+  saves,
 }: {
   creator: string;
   name: string;
   description: string;
   id: string;
+  saves: number;
 }) => {
   return (
     <Link
@@ -23,6 +25,7 @@ const WorkoutCard = ({
         <p>Author: {creator}</p>
       </div>
       <p className={'mt-2'}>{description}</p>
+      <p>{saves} saves</p>
     </Link>
   );
 };

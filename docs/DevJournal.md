@@ -275,3 +275,10 @@ if (process.env.NODE_ENV === 'development') {
 // separate module, the client can be shared across functions.
 export default clientPromise;
 ```
+
+## 22/11/23
+
+Looking into how to make a search function: https://stackoverflow.com/questions/28775051/best-way-to-perform-a-full-text-search-in-mongodb-and-mongoose
+
+Forgot that a GET request cannot have a body, so I'll have use URL variables. Actually, scratch that, I can just change the API route to have `/${name}/${desc}`
+For some reason I'm getting an issue where the wrong route is being executed. Sending an empty `[name]` field to `/api/workouts/search` gives back a 500 response but it's actually coming back from `/api/workouts/[id]` which is weird. It seems like it thinks the "search" is the ID which is fair for it to do. Now I have to work around that... Looks like I'll just put "all" as the search string LMAO.

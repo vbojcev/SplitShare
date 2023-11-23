@@ -29,6 +29,7 @@ const CreateWorkout = () => {
     description: '',
     exercises: [{ id: 1, name: '', sets: 1, reps: 1, note: '' }],
     tags: [],
+    saves: 0,
   });
 
   // For readability of users, indexing starts at 1
